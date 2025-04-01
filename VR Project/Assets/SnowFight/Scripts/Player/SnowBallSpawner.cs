@@ -1,95 +1,48 @@
 using UnityEngine;
-using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
-using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
-public class SnowballSpawner : MonoBehaviour
+public class SnowBallSpawner : MonoBehaviour
 {
-    [Header("Snowball Settings")]
-    public GameObject SnowballPrefab; // Prefab della palla di neve
-    public LayerMask SnowLayer; // Layer che rappresenta la "neve"
-    public float SpawnCooldown = 1f; // Tempo minimo tra spawn
-    public float HandCheckDistance = 5f; // Distanza massima dal pavimento per creare la palla
+    // Riferimento al prefab della palla di neve
+    public GameObject snowBallPrefab;
 
-    [Header("Player Settings")]
-    public float BendThreshold = 0f; // Altezza relativa per il piegamento
+    // Distanza di offset rispetto alla mano
+    public Vector3 handOffset = new Vector3(0, 0.1f, 0);
 
-    private XRNode _headNode = XRNode.Head;
-    private XRNode _leftHandNode = XRNode.LeftHand;
-    private XRNode _rightHandNode = XRNode.RightHand;
-    private float _lastSpawnTime = 0f;
-    private Transform _xrOrigin;
-
-    void Start()
+    // Metodo chiamato quando l'oggetto viene selezionato
+    public void OnSelectEntered(SelectEnterEventArgs args)
     {
-        _xrOrigin = Camera.main.transform.root;
+        Debug.Log("Funziono");
+
+        // Cast dell'argomento interactorObject a XRBaseInteractor
+        XRBaseInteractor interactor = args.interactorObject as XRBaseInteractor;
+
+        // Verifica che il cast abbia avuto successo
+        if (interactor != null)
+        {
+            // Chiamare il metodo per creare la palla di neve
+            CreateSnowBall(interactor);
+        }
+        else
+        {
+            Debug.LogWarning("L'interactor non è di tipo XRBaseInteractor.");
+        }
     }
 
-    void Update()
+    // Metodo per creare la palla di neve
+    private void CreateSnowBall(XRBaseInteractor interactor)
     {
-        if (Time.time - _lastSpawnTime < SpawnCooldown)
+        if (snowBallPrefab == null)
+        {
+            Debug.LogWarning("Prefab della palla di neve non settato.");
             return;
-
-        Vector3 headPosition;
-        if (TryGetHeadPosition(out headPosition))
-        {
-            float relativeHeight = headPosition.y - _xrOrigin.position.y;
-            if (relativeHeight < BendThreshold)
-            {
-                CheckHandPositionAndSpawn();
-                _lastSpawnTime = Time.time;
-            }
         }
-    }
 
-    private bool TryGetHeadPosition(out Vector3 position)
-    {
-        InputDevices.GetDeviceAtXRNode(_headNode).TryGetFeatureValue(CommonUsages.devicePosition, out position);
-        return position != Vector3.zero;
-    }
+        // Calcola la posizione della mano con offset
+        Vector3 handPosition = interactor.transform.position + handOffset;
 
-    private bool TryGetHandPosition(XRNode handNode, out Vector3 position)
-    {
-        return InputDevices.GetDeviceAtXRNode(handNode).TryGetFeatureValue(CommonUsages.devicePosition, out position);
-    }
-
-    private void CheckHandPositionAndSpawn()
-    {
-        Vector3 leftHandPos, rightHandPos;
-        bool leftHandValid = TryGetHandPosition(_leftHandNode, out leftHandPos);
-        bool rightHandValid = TryGetHandPosition(_rightHandNode, out rightHandPos);
-
-        if (leftHandValid && IsTouchingSnow(leftHandPos))
-        {
-            SpawnSnowball(leftHandPos);
-        }
-        else if (rightHandValid && IsTouchingSnow(rightHandPos))
-        {
-            SpawnSnowball(rightHandPos);
-        }
-    }
-
-    private bool IsTouchingSnow(Vector3 handPosition)
-    {
-        return Physics.Raycast(handPosition, Vector3.down, HandCheckDistance, SnowLayer);
-    }
-
-    private void SpawnSnowball(Vector3 spawnPosition)
-    {
-        GameObject snowball = Instantiate(SnowballPrefab, spawnPosition, Quaternion.identity);
-        var interactable = snowball.GetComponent<XRGrabInteractable>();
-        if (interactable != null)
-        {
-            interactable.selectEntered.AddListener(OnSnowballGrabbed);
-        }
-    }
-
-    private void OnSnowballGrabbed(SelectEnterEventArgs args)
-    {
-        Rigidbody rb = args.interactableObject.transform.GetComponent<Rigidbody>();
-        if (rb != null)
-        {
-            rb.isKinematic = false;
-        }
+        // Istanzia la palla di neve alla posizione della mano
+        Instantiate(snowBallPrefab, handPosition, Quaternion.identity);
     }
 }
