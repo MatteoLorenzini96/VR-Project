@@ -1,24 +1,36 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.XR.Interaction.Toolkit.Interactables;
 using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class SnowBallSpawner : MonoBehaviour
 {
-    // Riferimento al prefab della palla di neve
     public GameObject snowBallPrefab;
-
-    // Distanza di offset rispetto alla mano
     public Vector3 handOffset = new Vector3(0, 0.1f, 0);
 
-    // Metodo chiamato quando l'oggetto viene selezionato
+    private XRGrabInteractable grabInteractable;
+
+    void Start()
+    {
+        // Assicurati che l'oggetto abbia un componente XRGrabInteractable
+        grabInteractable = gameObject.GetComponent<XRGrabInteractable>();
+        if (grabInteractable == null)
+        {
+            grabInteractable = gameObject.AddComponent<XRGrabInteractable>();
+        }
+
+        // Aggiungi un listener per quando l'oggetto viene selezionato
+        grabInteractable.selectEntered.AddListener(OnSelectEntered);
+    }
+
+    // Gestisce l'evento quando il giocatore tenta di afferrare l'oggetto
     public void OnSelectEntered(SelectEnterEventArgs args)
     {
-        Debug.Log("Funziono");
+        Debug.Log("Tentativo di afferrare la palla di neve");
 
-        // Cast dell'argomento interactorObject a XRBaseInteractor
         XRBaseInteractor interactor = args.interactorObject as XRBaseInteractor;
 
-        // Verifica che il cast abbia avuto successo
+        // Verifica che l'interactor sia valido
         if (interactor != null)
         {
             // Chiamare il metodo per creare la palla di neve
@@ -30,7 +42,6 @@ public class SnowBallSpawner : MonoBehaviour
         }
     }
 
-    // Metodo per creare la palla di neve
     private void CreateSnowBall(XRBaseInteractor interactor)
     {
         if (snowBallPrefab == null)
@@ -39,10 +50,17 @@ public class SnowBallSpawner : MonoBehaviour
             return;
         }
 
-        // Calcola la posizione della mano con offset
         Vector3 handPosition = interactor.transform.position + handOffset;
 
-        // Istanzia la palla di neve alla posizione della mano
-        Instantiate(snowBallPrefab, handPosition, Quaternion.identity);
+        // Instanzia la palla di neve
+        GameObject snowBall = Instantiate(snowBallPrefab, handPosition, Quaternion.identity);
+
+        // Aggiungi il componente XRGrabInteractable per permettere l'interazione
+        XRGrabInteractable grabInteractable = snowBall.AddComponent<XRGrabInteractable>();
+
+        // Aggiungi l'XRBaseInteractor come interactor che "prende" l'oggetto
+        grabInteractable.interactorsSelecting.Add(interactor);
+
+        // Puoi anche opzionalmente aggiungere un effetto visivo o fisico qui
     }
 }
