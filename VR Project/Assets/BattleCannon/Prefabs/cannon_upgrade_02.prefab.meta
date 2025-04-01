@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a658eab1da5d5ae428cff76f5b088d4b
+timeCreated: 1472502977
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 70589
+  packageName: Battle Cannon
+  packageVersion: 1.0
+  assetPath: Assets/BattleCannon/Prefabs/cannon_upgrade_02.prefab
+  uploadId: 134777
