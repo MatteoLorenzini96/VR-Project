@@ -9,10 +9,10 @@ public class SnowballSpawner : MonoBehaviour
     public GameObject SnowballPrefab; // Prefab della palla di neve
     public LayerMask SnowLayer; // Layer che rappresenta la "neve"
     public float SpawnCooldown = 1f; // Tempo minimo tra spawn
-    public float HandCheckDistance = 0.2f; // Distanza massima dal pavimento per creare la palla
+    public float HandCheckDistance = 5f; // Distanza massima dal pavimento per creare la palla
 
     [Header("Player Settings")]
-    public float BendThreshold = 0.4f; // Altezza relativa per il piegamento
+    public float BendThreshold = 0f; // Altezza relativa per il piegamento
 
     private XRNode _headNode = XRNode.Head;
     private XRNode _leftHandNode = XRNode.LeftHand;
