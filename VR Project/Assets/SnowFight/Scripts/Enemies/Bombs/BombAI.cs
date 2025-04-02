@@ -11,10 +11,22 @@ public class BombAI : MonoBehaviour
     [SerializeField] private string _explosionSFXName = "ExplosionSound";
 
     private Transform _playerTransform;
+    private EnemyIdentifier _enemyIdentifier;
 
     private void Start()
     {
         SearchForPlayer();
+        SearchForIdentifier();
+    }
+
+    private void SearchForIdentifier()
+    {
+        _enemyIdentifier = GetComponent<EnemyIdentifier>();
+
+        if (_enemyIdentifier == null)
+        {
+            Debug.LogError("EnemyIdentifier non trovato su " + gameObject.name + "!");
+        }
     }
 
     private void SearchForPlayer()
@@ -51,7 +63,7 @@ public class BombAI : MonoBehaviour
         transform.position += directionToPlayer * _moveSpeed * Time.deltaTime;
     }
 
-    private void Explode()
+    public void Explode()
     {
         Debug.Log("Esplosione avvenuta");
 
@@ -60,6 +72,6 @@ public class BombAI : MonoBehaviour
 
         // Aggiungere codice per i danni (se necessario)
 
-        Destroy(gameObject);
+        _enemyIdentifier.DestroyEnemy();
     }
 }

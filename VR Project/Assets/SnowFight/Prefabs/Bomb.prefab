@@ -118,6 +118,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3120534162540050840}
   - component: {fileID: 4324569890014284089}
+  - component: {fileID: 8763766126515469341}
   m_Layer: 0
   m_Name: Bomb
   m_TagString: Untagged
@@ -157,3 +158,15 @@ MonoBehaviour:
   _moveSpeed: 2
   _explosionVFXName: 
   _explosionSFXName: 
+--- !u!114 &8763766126515469341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7712837511909631608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7333ad979e1ed46a57fecaa0047c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

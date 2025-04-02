@@ -15,19 +15,41 @@ public class TurretAI : MonoBehaviour
     [SerializeField] private float _shootCooldown = 3f;
     [SerializeField] private float _targetUpdateInterval = 1f;
 
-    private WaveManager _waveManager;
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
     private bool _movingToTarget = true;
     private Transform _playerTransform;
+    private EnemyIdentifier _enemyIdentifier;
 
     private void Start()
     {
+        SearchForIdentifier();
+
         _startPosition = transform.position;
         _targetPosition = _startPosition + _movementOffset;
 
+        LookAtPlayer();
         StartCoroutine(UpdateTarget());
         StartCoroutine(ShootAtPlayer());
+    }
+
+    private void SearchForIdentifier()
+    {
+        _enemyIdentifier = GetComponent<EnemyIdentifier>();
+
+        if (_enemyIdentifier == null)
+        {
+            Debug.LogError("EnemyIdentifier non trovato su " + gameObject.name + "!");
+        }
+    }
+    private void LookAtPlayer()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        if (playerObject)
+        {
+            _playerTransform = playerObject.transform;
+            transform.LookAt(_playerTransform);
+        }
     }
 
     private void Update()
@@ -80,14 +102,10 @@ public class TurretAI : MonoBehaviour
             yield return new WaitForSeconds(_shootCooldown);
         }
     }
-    public void SetWaveManager(WaveManager _manager)
+
+    private void HandleDestruction()
     {
-        _waveManager = _manager;
+        _enemyIdentifier.DestroyEnemy();
     }
 
-    public void Die()
-    {
-        _waveManager.EnemyDied();
-        Destroy(gameObject);
-    }
 }

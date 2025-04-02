@@ -11,9 +11,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float _delayBetweenWaves = 15f;
 
     private int _currentWaveIndex = 0;
-    private int _enemiesAlive = 0;
     private Transform _player;
-    private Transform _turretParent;
+    private Transform _enemiesParent;
     private Dictionary<int, List<Transform>> _groupedSpawnPoints = new Dictionary<int, List<Transform>>();
 
     void Start()
@@ -24,7 +23,7 @@ public class WaveManager : MonoBehaviour
             Debug.LogError("Player not found! Make sure there is an object with the tag 'Player'.");
         }
 
-        _turretParent = new GameObject("Turrets").transform;
+        _enemiesParent = new GameObject("Enemies").transform;
         FindSpawnerPositions();
         StartCoroutine(StartWave());
     }
@@ -39,11 +38,12 @@ public class WaveManager : MonoBehaviour
 
     private void DebugKillAll()
     {
-        TurretAI[] turrets = FindObjectsOfType<TurretAI>();
-        foreach (TurretAI turret in turrets)
+        EnemyIdentifier[] enemies = FindObjectsOfType<EnemyIdentifier>();
+        foreach (EnemyIdentifier enemy in enemies)
         {
-            turret.Die();
+            enemy.DestroyEnemy();
         }
+
         Debug.Log("All enemies have been killed.");
     }
 
@@ -87,22 +87,29 @@ public class WaveManager : MonoBehaviour
             yield break;
         }
 
-        _enemiesAlive = currentWave._enemies.Length;
+        int spawnedEnemies = 0;
         for (int i = 0; i < currentWave._enemies.Length; i++)
         {
-            GameObject enemy = Instantiate(currentWave._enemies[i], spawnPointsForWave[i].position, Quaternion.identity, _turretParent);
-            if (_player != null)
-            {
-                enemy.transform.LookAt(_player);
-            }
-            enemy.GetComponent<TurretAI>().SetWaveManager(this);
+            GameObject enemy = Instantiate(currentWave._enemies[i], spawnPointsForWave[i].position, Quaternion.identity, _enemiesParent);
+            enemy.GetComponent<EnemyIdentifier>().SetWaveManager(this);
+            spawnedEnemies++;
         }
+
+        Debug.Log("Wave " + _currentWaveIndex + " spawned " + spawnedEnemies + " enemies.");
     }
 
     public void EnemyDied()
     {
-        _enemiesAlive--;
-        if (_enemiesAlive <= 0)
+        StartCoroutine(CheckRemainingEnemies());
+    }
+
+    private IEnumerator CheckRemainingEnemies()
+    {
+        yield return new WaitForEndOfFrame();
+        int remainingEnemies = FindObjectsOfType<EnemyIdentifier>().Length;
+        Debug.Log("Enemies remaining: " + remainingEnemies);
+
+        if (remainingEnemies == 0)
         {
             StartCoroutine(NextWave());
         }

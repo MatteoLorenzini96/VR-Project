@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8278030468094718111}
   - component: {fileID: 6234937656229568081}
   - component: {fileID: 6745131838089668367}
+  - component: {fileID: 7520905444568049838}
   m_Layer: 0
   m_Name: Turret_Left_To_Right
   m_TagString: Untagged
@@ -81,6 +82,18 @@ MonoBehaviour:
   _bulletSpeed: 15
   _shootCooldown: 3
   _targetUpdateInterval: 1
+--- !u!114 &7520905444568049838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42960047886401429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7333ad979e1ed46a57fecaa0047c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &428635496479584463
 GameObject:
   m_ObjectHideFlags: 0

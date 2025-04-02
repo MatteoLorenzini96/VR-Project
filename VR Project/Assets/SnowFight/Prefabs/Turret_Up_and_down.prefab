@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2609831340217159611}
   - component: {fileID: 1455042300001425878}
   - component: {fileID: 6607541255633310105}
+  - component: {fileID: -4075170359207635324}
   m_Layer: 0
   m_Name: Turret_Up_and_down
   m_TagString: Untagged
@@ -81,6 +82,18 @@ MonoBehaviour:
   _bulletSpeed: 15
   _shootCooldown: 3
   _targetUpdateInterval: 1
+--- !u!114 &-4075170359207635324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375926029249075172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b7333ad979e1ed46a57fecaa0047c48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1884399119392083896
 GameObject:
   m_ObjectHideFlags: 0
