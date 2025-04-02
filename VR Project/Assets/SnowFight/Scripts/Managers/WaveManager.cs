@@ -38,7 +38,7 @@ public class WaveManager : MonoBehaviour
 
     private void DebugKillAll()
     {
-        EnemyIdentifier[] enemies = FindObjectsOfType<EnemyIdentifier>();
+        EnemyIdentifier[] enemies = FindObjectsByType<EnemyIdentifier>(FindObjectsSortMode.None);
         foreach (EnemyIdentifier enemy in enemies)
         {
             enemy.DestroyEnemy();
@@ -49,7 +49,7 @@ public class WaveManager : MonoBehaviour
 
     private void FindSpawnerPositions()
     {
-        SpawnerIdentifier[] spawners = FindObjectsOfType<SpawnerIdentifier>().OrderBy(s => s.name).ToArray();
+        SpawnerIdentifier[] spawners = FindObjectsByType<SpawnerIdentifier>(FindObjectsSortMode.InstanceID).OrderBy(s => s.name).ToArray();
         _spawnPoints.Clear();
         _groupedSpawnPoints.Clear();
 
@@ -106,7 +106,7 @@ public class WaveManager : MonoBehaviour
     private IEnumerator CheckRemainingEnemies()
     {
         yield return new WaitForEndOfFrame();
-        int remainingEnemies = FindObjectsOfType<EnemyIdentifier>().Length;
+        int remainingEnemies = FindObjectsByType<EnemyIdentifier>(FindObjectsSortMode.None).Length;
         Debug.Log("Enemies remaining: " + remainingEnemies);
 
         if (remainingEnemies == 0)
