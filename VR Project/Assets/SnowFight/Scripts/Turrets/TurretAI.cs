@@ -15,6 +15,7 @@ public class TurretAI : MonoBehaviour
     [SerializeField] private float _shootCooldown = 3f;
     [SerializeField] private float _targetUpdateInterval = 1f;
 
+    private WaveManager _waveManager;
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
     private bool _movingToTarget = true;
@@ -78,5 +79,15 @@ public class TurretAI : MonoBehaviour
             }
             yield return new WaitForSeconds(_shootCooldown);
         }
+    }
+    public void SetWaveManager(WaveManager _manager)
+    {
+        _waveManager = _manager;
+    }
+
+    public void Die()
+    {
+        _waveManager.EnemyDied();
+        Destroy(gameObject);
     }
 }
