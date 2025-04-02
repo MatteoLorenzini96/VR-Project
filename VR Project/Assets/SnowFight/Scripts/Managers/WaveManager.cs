@@ -44,7 +44,7 @@ public class WaveManager : MonoBehaviour
             enemy.DestroyEnemy();
         }
 
-        Debug.Log("All enemies have been killed.");
+        //Debug.Log("All enemies have been killed.");
     }
 
     private void FindSpawnerPositions()
