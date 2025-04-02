@@ -1577,6 +1577,30 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
+      propertyPath: _delayBetweenWaves
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
+      propertyPath: _wavesData.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
+      propertyPath: _spawnPoints.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
+      propertyPath: '_wavesData.Array.data[0]'
+      value: 
+      objectReference: {fileID: 11400000, guid: c6bf1450263912940b1a0154488218a0, type: 2}
+    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
+      propertyPath: '_wavesData.Array.data[1]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 1b945e5c28d176f4688534e898934b2f, type: 2}
+    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
+      propertyPath: '_wavesData.Array.data[2]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 7451d25bc6afd0443b0554adb1d62a01, type: 2}
+    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: '_spawnPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 549800861}
@@ -1624,6 +1648,10 @@ PrefabInstance:
     - target: {fileID: 5150731169434195524, guid: 06a31d2537dba924baaa20226d932ca1, type: 3}
       propertyPath: m_Name
       value: SnowBallSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 5150731169434195524, guid: 06a31d2537dba924baaa20226d932ca1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7970379294109607399, guid: 06a31d2537dba924baaa20226d932ca1, type: 3}
       propertyPath: m_LocalScale.x
@@ -1802,6 +1830,10 @@ PrefabInstance:
     - target: {fileID: 7712837511909631608, guid: 8cb054fdbb7c127409708a4621427131, type: 3}
       propertyPath: m_Name
       value: Bomb
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712837511909631608, guid: 8cb054fdbb7c127409708a4621427131, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

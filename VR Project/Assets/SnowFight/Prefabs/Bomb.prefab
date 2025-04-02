@@ -155,4 +155,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _explosionRadius: 1
   _moveSpeed: 2
-  _explosionEffect: {fileID: 0}
+  _explosionVFXName: 
+  _explosionSFXName: 

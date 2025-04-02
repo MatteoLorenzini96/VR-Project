@@ -8,7 +8,7 @@ public class WaveManager : MonoBehaviour
     [Header("Waves Settings")]
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private List<SpawnerData> _wavesData;
-    [SerializeField] private float _delayBetweenWaves = 5f;
+    [SerializeField] private float _delayBetweenWaves = 15f;
 
     private int _currentWaveIndex = 0;
     private int _enemiesAlive = 0;
