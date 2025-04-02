@@ -27,15 +27,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 42960047886401429}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.99906033, z: -0, w: 0.04334188}
-  m_LocalPosition: {x: 160.39114, y: 2.53, z: -42.48867}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 648107680715009999}
   - {fileID: 5313040218678135336}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -175.032, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6234937656229568081
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -75,13 +75,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4361bb2a5fa48864ca187c38c0a4adb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _canMove: 1
   _movementOffset: {x: 2, y: 0, z: 0}
   _movementSpeed: 2
   _bulletPrefab: {fileID: 7625530528999129246, guid: 7b3950af6b4503f4eb06a3b8513b63aa, type: 3}
-  _firePoint: {fileID: 5313040218678135336}
+  _firePoints:
+  - {fileID: 5313040218678135336}
   _bulletSpeed: 15
-  _shootCooldown: 3
+  _normalCooldown: 3
   _targetUpdateInterval: 1
+  _randomCooldown: 0
+  _shootCooldownMin: 2
+  _shootCooldownMax: 5
 --- !u!114 &7520905444568049838
 MonoBehaviour:
   m_ObjectHideFlags: 0

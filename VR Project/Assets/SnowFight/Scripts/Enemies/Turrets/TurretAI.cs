@@ -1,19 +1,26 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class TurretAI : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private Vector3 _movementOffset = Vector3.zero; // Quanto deve muoversi
+    [SerializeField] private bool _canMove = true;
+    [SerializeField] private Vector3 _movementOffset = Vector3.zero;
     [SerializeField] private float _movementSpeed = 2f;
 
     [Header("Shooting Settings")]
     [SerializeField] private GameObject _bulletPrefab;
-    [SerializeField] private Transform _firePoint;
+    [SerializeField] private List<Transform> _firePoints;
     [SerializeField] private float _bulletSpeed = 10f;
-    [SerializeField] private float _shootCooldown = 3f;
+    [SerializeField] private float _normalCooldown = 3f; // Cooldown fisso
     [SerializeField] private float _targetUpdateInterval = 1f;
+
+    [Header("Is Cooldown Random?")]
+    [SerializeField] private bool _randomCooldown = false; // Se true, cooldown random, altrimenti fisso
+    [SerializeField] private float _shootCooldownMin = 2f;
+    [SerializeField] private float _shootCooldownMax = 5f;
 
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
@@ -42,6 +49,7 @@ public class TurretAI : MonoBehaviour
             Debug.LogError("EnemyIdentifier non trovato su " + gameObject.name + "!");
         }
     }
+
     private void LookAtPlayer()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -52,9 +60,14 @@ public class TurretAI : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        HandleMovement();
+        if (_canMove)
+        {
+            HandleMovement();
+        }
+
+        else return;        
     }
 
     private void HandleMovement()
@@ -88,18 +101,27 @@ public class TurretAI : MonoBehaviour
     {
         while (true)
         {
-            if (_playerTransform != null && _bulletPrefab != null && _firePoint != null)
+            if (_playerTransform != null && _bulletPrefab != null && _firePoints.Count > 0)
             {
-                Vector3 direction = (_playerTransform.position - _firePoint.position).normalized;
-                GameObject bulletInstance = Instantiate(_bulletPrefab, _firePoint.position, Quaternion.identity);
-
-                Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
-                if (bulletScript != null)
+                foreach (var firePoint in _firePoints)
                 {
-                    bulletScript.Initialize(direction, _bulletSpeed);
+                    Vector3 direction = (_playerTransform.position - firePoint.position).normalized;
+                    GameObject bulletInstance = Instantiate(_bulletPrefab, firePoint.position, Quaternion.identity);
+
+                    Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
+                    if (bulletScript != null)
+                    {
+                        bulletScript.Initialize(direction, _bulletSpeed);
+                    }
                 }
+
+                float cooldown = _randomCooldown ? Random.Range(_shootCooldownMin, _shootCooldownMax) : _normalCooldown;
+                yield return new WaitForSeconds(cooldown);
             }
-            yield return new WaitForSeconds(_shootCooldown);
+            else
+            {
+                yield return null;
+            }
         }
     }
 
@@ -107,5 +129,4 @@ public class TurretAI : MonoBehaviour
     {
         _enemyIdentifier.DestroyEnemy();
     }
-
 }
