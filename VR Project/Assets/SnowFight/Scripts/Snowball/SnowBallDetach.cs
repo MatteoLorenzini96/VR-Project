@@ -2,40 +2,37 @@ using UnityEngine;
 
 public class SnowBallDetach : MonoBehaviour
 {
-    private Vector3 initialPosition;  // La posizione iniziale dell'oggetto
-    private bool hasDetached = false; // Flag per eseguire il detach solo una volta
+    private Vector3 initialPosition;
+    private Transform originalParent;
+    private bool hasDetached = false; 
 
     private void Start()
     {
-        // Salviamo la posizione iniziale al momento dell'avvio
         initialPosition = transform.position;
+        originalParent = transform.parent;
     }
 
     public void DetachAndNotifyParent()
     {
         if (hasDetached)
-            return;  // Assicuriamoci che il detach venga fatto solo una volta
+            return;
 
         hasDetached = true;
 
-        // Troviamo l'oggetto "SnowBalls" o lo creiamo se non esiste
-        GameObject snowBallsParent = GameObject.Find("SnowBalls");
+        GameObject snowBallsParent = GameObject.Find("SnowBallsHolder");
         if (snowBallsParent == null)
         {
-            snowBallsParent = new GameObject("SnowBalls");
+            snowBallsParent = new GameObject("SnowBallsHolder");
         }
 
-        // Stacchiamo l'oggetto dal suo parent attuale
         transform.SetParent(null);
 
-        // Impostiamo il nuovo parent
         transform.SetParent(snowBallsParent.transform);
 
-        // Chiamare la funzione SpawnPrefab nel parent SnowBalls
-        SnowBallsParent parentScript = snowBallsParent.GetComponent<SnowBallsParent>();
+        SnowBallsHolder parentScript = snowBallsParent.GetComponent<SnowBallsHolder>();
         if (parentScript != null)
         {
-            parentScript.SpawnPrefab(initialPosition);
+            parentScript.SpawnPrefab(initialPosition, originalParent);
         }
         else
         {
