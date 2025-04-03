@@ -427,6 +427,7 @@ GameObject:
   - component: {fileID: 4532202330006507728}
   - component: {fileID: 4767220239559152971}
   - component: {fileID: 2271045565057111925}
+  - component: {fileID: 1611895285556267730}
   m_Layer: 0
   m_Name: SnowBall
   m_TagString: Untagged
@@ -590,6 +591,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1611895285556267730}
+        m_TargetAssemblyTypeName: SnowballThrow, Assembly-CSharp
+        m_MethodName: OnRelease
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstFocusEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -619,7 +632,7 @@ MonoBehaviour:
   m_SnapToColliderVolume: 1
   m_ReinitializeDynamicAttachEverySingleGrab: 1
   m_AttachEaseInTime: 0.15
-  m_MovementType: 2
+  m_MovementType: 0
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -636,36 +649,36 @@ MonoBehaviour:
   m_SmoothScale: 0
   m_SmoothScaleAmount: 8
   m_TightenScale: 0.1
-  m_ThrowOnDetach: 1
+  m_ThrowOnDetach: 0
   m_ThrowSmoothingDuration: 0.25
   m_ThrowSmoothingCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 1
       value: 1
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  m_ThrowVelocityScale: 1
-  m_ThrowAngularVelocityScale: 1
+  m_ThrowVelocityScale: 0.5
+  m_ThrowAngularVelocityScale: 0.5
   m_ForceGravityOnDetach: 0
-  m_RetainTransformParent: 1
+  m_RetainTransformParent: 0
   m_StartingSingleGrabTransformers: []
   m_StartingMultipleGrabTransformers: []
   m_AddDefaultGrabTransformers: 1
@@ -682,3 +695,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8cc7d25e2d13e2418f4ba09e9792fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1611895285556267730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8475854945498553369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d365c7aa8115ce3478e0c85f4a636725, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _grabInteractable: {fileID: 4767220239559152971}
+  _snowballRigidbody: {fileID: 4532202330006507728}
+  _maxThrowSpeed: 12
+  _throwStrengthMultiplier: 3
+  _linearDamping: 0.4
+  _angularDamping: 5
+  _yThrowModifier: 3
