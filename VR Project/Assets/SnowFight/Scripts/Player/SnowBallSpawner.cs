@@ -5,43 +5,49 @@ using UnityEngine.XR.Interaction.Toolkit.Interactors;
 
 public class SnowBallSpawner : MonoBehaviour
 {
-    public GameObject snowBallPrefab;
-    public Vector3 handOffset = new Vector3(0, 0.1f, 0);
+    public GameObject snowBallPrefab;  // Prefab della palla di neve
+    public Vector3 handOffset = new Vector3(0, 0.1f, 0);  // Offset della mano
 
-    private XRGrabInteractable grabInteractable;
+    private XRSimpleInteractable simpleInteractable;  // Riferimento all'interattore semplice
+    private bool hasSpawned = false;  // Flag per evitare la creazione di più palle di neve
 
     void Start()
     {
-        // Assicurati che l'oggetto abbia un componente XRGrabInteractable
-        grabInteractable = gameObject.GetComponent<XRGrabInteractable>();
-        if (grabInteractable == null)
+        // Ottieni o aggiungi il componente XRSimpleInteractable
+        simpleInteractable = gameObject.GetComponent<XRSimpleInteractable>();
+        if (simpleInteractable == null)
         {
-            grabInteractable = gameObject.AddComponent<XRGrabInteractable>();
+            simpleInteractable = gameObject.AddComponent<XRSimpleInteractable>();
         }
 
-        // Aggiungi un listener per quando l'oggetto viene selezionato
-        grabInteractable.selectEntered.AddListener(OnSelectEntered);
+        // Aggiungi il listener per l'evento di selezione
+        simpleInteractable.selectEntered.AddListener(OnSelectEntered);
     }
 
-    // Gestisce l'evento quando il giocatore tenta di afferrare l'oggetto
+    // Questo metodo viene chiamato quando l'oggetto viene selezionato (interagito)
     public void OnSelectEntered(SelectEnterEventArgs args)
     {
-        Debug.Log("Tentativo di afferrare la palla di neve");
+        Debug.Log("Tentativo di afferrare lo spawner");
 
         XRBaseInteractor interactor = args.interactorObject as XRBaseInteractor;
-
-        // Verifica che l'interactor sia valido
-        if (interactor != null)
+        if (interactor != null && !hasSpawned)
         {
-            // Chiamare il metodo per creare la palla di neve
+            // Crea la palla di neve
             CreateSnowBall(interactor);
+
+            // Forza il rilascio immediato dell'interazione con lo spawner
+            ForceReleaseSpawner(interactor);
+
+            // Imposta il flag per evitare la creazione di più palle di neve
+            hasSpawned = true;
         }
         else
         {
-            Debug.LogWarning("L'interactor non è di tipo XRBaseInteractor.");
+            Debug.LogWarning("L'interactor non è di tipo XRBaseInteractor o la palla di neve è già stata creata.");
         }
     }
 
+    // Crea la palla di neve e la assegna alla mano del giocatore
     private void CreateSnowBall(XRBaseInteractor interactor)
     {
         if (snowBallPrefab == null)
@@ -50,17 +56,40 @@ public class SnowBallSpawner : MonoBehaviour
             return;
         }
 
+        // Posiziona la palla di neve nella mano del giocatore con l'offset desiderato
         Vector3 handPosition = interactor.transform.position + handOffset;
-
-        // Instanzia la palla di neve
         GameObject snowBall = Instantiate(snowBallPrefab, handPosition, Quaternion.identity);
 
-        // Aggiungi il componente XRGrabInteractable per permettere l'interazione
-        XRGrabInteractable grabInteractable = snowBall.AddComponent<XRGrabInteractable>();
+        // Aggiungi XRGrabInteractable alla palla di neve
+        XRGrabInteractable snowBallInteractable = snowBall.GetComponent<XRGrabInteractable>();
+        if (snowBallInteractable == null)
+        {
+            snowBallInteractable = snowBall.AddComponent<XRGrabInteractable>();
+        }
 
-        // Aggiungi l'XRBaseInteractor come interactor che "prende" l'oggetto
-        grabInteractable.interactorsSelecting.Add(interactor);
+        // Seleziona immediatamente la palla di neve per l'interactor (mano)
+        if (interactor.interactionManager != null)
+        {
+            interactor.interactionManager.SelectEnter(
+                (IXRSelectInteractor)interactor,
+                (IXRSelectInteractable)snowBallInteractable
+            );
+        }
+    }
 
-        // Puoi anche opzionalmente aggiungere un effetto visivo o fisico qui
+    // Rilascia immediatamente l'interazione con lo spawner
+    private void ForceReleaseSpawner(XRBaseInteractor interactor)
+    {
+        // Rilascia l'interazione con lo spawner solo se l'interactor lo sta effettivamente selezionando
+        if (simpleInteractable.isSelected && interactor.interactionManager != null)
+        {
+            interactor.interactionManager.SelectExit(
+                (IXRSelectInteractor)interactor,
+                (IXRSelectInteractable)simpleInteractable
+            );
+
+            // Resetta il flag di spawner
+            hasSpawned = false;
+        }
     }
 }
