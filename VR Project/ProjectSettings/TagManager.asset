@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - SnowWall
+  - SnowBlock
   layers:
   - Default
   - TransparentFX
