@@ -42,6 +42,6 @@ MonoBehaviour:
   - 
   - 
   - 
-  - 
+  - NonSocketableSnowWall
   - Grabbable
   - Teleport

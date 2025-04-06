@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3826542802097609097}
+  - component: {fileID: 1896475235847960511}
   - component: {fileID: 2712563505697513623}
   - component: {fileID: 2423551476153849882}
-  - component: {fileID: 1896475235847960511}
   - component: {fileID: 8127988129413154084}
   m_Layer: 6
   m_Name: UpAttachPoint
@@ -35,6 +35,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 92167645200597390}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1896475235847960511
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42268539125408160}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 64
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.4, y: 0.3, z: 0.4}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2712563505697513623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_InteractionManager: {fileID: 0}
   m_InteractionLayers:
-    m_Bits: 4294967295
+    m_Bits: 1073741824
   m_Handedness: 0
   m_AttachTransform: {fileID: 3826542802097609097}
   m_KeepSelectedTargetValid: 1
@@ -96,27 +117,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceptedTag: SnowBlock
---- !u!65 &1896475235847960511
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42268539125408160}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.4, y: 0.3, z: 0.4}
-  m_Center: {x: 0, y: 0, z: 0}
+  toggleSocket: {fileID: 0}
+  _directionToDisableHover: 1
 --- !u!114 &8127988129413154084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c49ca8cbab990418e50c21dc16a4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _directionToSet: 1
 --- !u!1 &83855024869560187
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8662548899530633596}
+  - component: {fileID: 9117778801857716645}
   m_Layer: 0
   m_Name: Base_SnowBlock
   m_TagString: SnowBlock
@@ -164,6 +168,20 @@ Transform:
   - {fileID: 92167645200597390}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9117778801857716645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83855024869560187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88af85bdeffe4cb4891bef981218a265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _targetObject: {fileID: 3858681046550310982}
+  _directionSocketActive: 1
 --- !u!1 &484721423609976755
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,7 +230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8054916920375356874
 Transform:
   m_ObjectHideFlags: 0
@@ -236,7 +254,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3071203683872428308}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49e0a5b5ff5540f5b14dd29d46faec22, type: 3}
   m_Name: 
@@ -496,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1410cbaaadf84a7aaa6459d37ad21b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Renderer: {fileID: 0}
+  m_Renderer: {fileID: 1365838221139330676}
   m_MaterialIndex: 0
 --- !u!114 &687209440193670057
 MonoBehaviour:
