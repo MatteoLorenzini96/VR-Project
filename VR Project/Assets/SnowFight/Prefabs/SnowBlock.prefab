@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3826542802097609097}
   - component: {fileID: 2712563505697513623}
+  - component: {fileID: 2423551476153849882}
   - component: {fileID: 1896475235847960511}
   m_Layer: 0
   m_Name: UpAttachPoint
@@ -66,8 +67,10 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
-  m_StartingHoverFilters: []
-  m_StartingSelectFilters: []
+  m_StartingHoverFilters:
+  - {fileID: 2423551476153849882}
+  m_StartingSelectFilters:
+  - {fileID: 2423551476153849882}
   m_ShowInteractableHoverMeshes: 1
   m_InteractableHoverMeshMaterial: {fileID: 0}
   m_InteractableCantHoverMeshMaterial: {fileID: 0}
@@ -79,6 +82,19 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &2423551476153849882
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 42268539125408160}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c2e6fbad05be84fbd7cb673ca707d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceptedTag: SnowBlock
 --- !u!65 &1896475235847960511
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -98,7 +114,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Size: {x: 0.4, y: 0.3, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &83855024869560187
 GameObject:
@@ -482,6 +498,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7813430935688133773}
   - component: {fileID: 1260902022459836728}
+  - component: {fileID: 7094512364858061085}
   - component: {fileID: 7111063633835688766}
   m_Layer: 0
   m_Name: 'LAttachPoint '
@@ -538,8 +555,10 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
-  m_StartingHoverFilters: []
-  m_StartingSelectFilters: []
+  m_StartingHoverFilters:
+  - {fileID: 2423551476153849882}
+  m_StartingSelectFilters:
+  - {fileID: 2423551476153849882}
   m_ShowInteractableHoverMeshes: 1
   m_InteractableHoverMeshMaterial: {fileID: 0}
   m_InteractableCantHoverMeshMaterial: {fileID: 0}
@@ -551,6 +570,19 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &7094512364858061085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4766675813763698987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c2e6fbad05be84fbd7cb673ca707d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceptedTag: SnowBlock
 --- !u!65 &7111063633835688766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -570,7 +602,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Size: {x: 0.4, y: 0.3, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5912731091775607053
 GameObject:
@@ -915,6 +947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7764247852796587766}
   - component: {fileID: 2698821575898197407}
+  - component: {fileID: 8106502580149371325}
   - component: {fileID: 8469830857866707475}
   m_Layer: 0
   m_Name: RAttachPoint
@@ -971,8 +1004,10 @@ MonoBehaviour:
   m_SelectExited:
     m_PersistentCalls:
       m_Calls: []
-  m_StartingHoverFilters: []
-  m_StartingSelectFilters: []
+  m_StartingHoverFilters:
+  - {fileID: 2423551476153849882}
+  m_StartingSelectFilters:
+  - {fileID: 2423551476153849882}
   m_ShowInteractableHoverMeshes: 1
   m_InteractableHoverMeshMaterial: {fileID: 0}
   m_InteractableCantHoverMeshMaterial: {fileID: 0}
@@ -984,6 +1019,19 @@ MonoBehaviour:
   m_SocketScaleMode: 0
   m_FixedScale: {x: 1, y: 1, z: 1}
   m_TargetBoundsSize: {x: 1, y: 1, z: 1}
+--- !u!114 &8106502580149371325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7960292725308935883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86c2e6fbad05be84fbd7cb673ca707d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  acceptedTag: SnowBlock
 --- !u!65 &8469830857866707475
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1003,5 +1051,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.5, y: 0.3, z: 0.5}
+  m_Size: {x: 0.4, y: 0.3, z: 0.4}
   m_Center: {x: 0, y: 0, z: 0}

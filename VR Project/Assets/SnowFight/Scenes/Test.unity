@@ -1135,6 +1135,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SnowBlock (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2698821575898197407, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
+      propertyPath: m_InteractionLayers.m_Bits
+      value: 1073741824
+      objectReference: {fileID: 0}
+    - target: {fileID: 2698821575898197407, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
+      propertyPath: m_StartingSelectFilters.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8662548899530633596, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.446
