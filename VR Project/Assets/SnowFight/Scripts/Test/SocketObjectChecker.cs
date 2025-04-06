@@ -31,6 +31,7 @@ public class SocketObjectChecker : MonoBehaviour
         if (toggleScript != null)
         {
             toggleScript.ActivateSocket();
+            enteredObject.tag = "SnowWall";
             //Debug.Log("Attivo il Socket dallo script: " + gameObject.name);
         }
     }
@@ -44,6 +45,7 @@ public class SocketObjectChecker : MonoBehaviour
         if (toggleScript != null)
         {
             toggleScript.DeactivateSocket();
+            exitedObject.tag = "SnowBlock";
             //Debug.Log("Disattivo il Socket dallo script: " + gameObject.name);
         }
     }
