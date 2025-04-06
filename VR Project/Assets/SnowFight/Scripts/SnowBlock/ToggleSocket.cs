@@ -6,6 +6,8 @@ public class ToggleSocket : MonoBehaviour
 
     public void ActivateSocket()
     {
+        Debug.Log(gameObject.name + "Attivo il Socket");
+
         if (_targetObject != null)
         {
             _targetObject.SetActive(true);
@@ -18,6 +20,8 @@ public class ToggleSocket : MonoBehaviour
 
     public void DeactivateSocket()
     {
+        Debug.Log(gameObject.name + "Disattivo il Socket");
+
         if (_targetObject != null)
         {
             _targetObject.SetActive(false);
