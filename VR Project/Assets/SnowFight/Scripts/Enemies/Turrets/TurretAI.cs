@@ -125,7 +125,7 @@ public class TurretAI : MonoBehaviour
         }
     }
 
-    private void HandleDestruction()
+    public void HandleDestruction()
     {
         _enemyIdentifier.DestroyEnemy();
     }
