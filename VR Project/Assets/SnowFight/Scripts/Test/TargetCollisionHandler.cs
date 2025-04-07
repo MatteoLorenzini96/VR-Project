@@ -6,7 +6,6 @@ public class TargetCollisionHandler : MonoBehaviour
 
     private void Start()
     {
-        // Cerca HealthManager nel parent
         _healthManager = GetComponentInParent<HealthManager>();
         if (_healthManager == null)
         {
