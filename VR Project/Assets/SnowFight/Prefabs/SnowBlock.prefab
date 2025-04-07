@@ -117,8 +117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceptedTag: SnowBlock
-  toggleSocket: {fileID: 6319544428393972783}
-  _directionToDisableHover: 3
+  negatedTagHover: SnowWall
 --- !u!114 &5929474155918501510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +130,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c49ca8cbab990418e50c21dc16a4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _directionToSet: 3
 --- !u!1 &83855024869560187
 GameObject:
   m_ObjectHideFlags: 0
@@ -144,7 +142,6 @@ GameObject:
   - component: {fileID: 4274894618306308743}
   - component: {fileID: 5503725088914920111}
   - component: {fileID: 6319544428393972783}
-  - component: {fileID: 8054648854800921227}
   m_Layer: 0
   m_Name: SnowBlock
   m_TagString: SnowBlock
@@ -342,19 +339,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetObject: {fileID: 3858681046550310982}
-  _directionSocketActive: 1
---- !u!114 &8054648854800921227
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 83855024869560187}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a4c658af3554b84f851d3b84c474e18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &484721423609976755
 GameObject:
   m_ObjectHideFlags: 0
@@ -620,8 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceptedTag: SnowBlock
-  toggleSocket: {fileID: 6319544428393972783}
-  _directionToDisableHover: 2
+  negatedTagHover: SnowWall
 --- !u!114 &617045560400413517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -634,7 +617,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c49ca8cbab990418e50c21dc16a4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _directionToSet: 2
 --- !u!1 &5912731091775607053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,8 +1067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   acceptedTag: SnowBlock
-  toggleSocket: {fileID: 6319544428393972783}
-  _directionToDisableHover: 1
+  negatedTagHover: SnowWall
 --- !u!114 &7649545387283812276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1099,4 +1080,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c49ca8cbab990418e50c21dc16a4d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _directionToSet: 1
