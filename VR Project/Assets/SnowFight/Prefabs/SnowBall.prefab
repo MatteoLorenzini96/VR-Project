@@ -234,12 +234,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 913802604480542195}
+  - component: {fileID: 2434007581929723898}
   - component: {fileID: 2471327447532460467}
   - component: {fileID: 3917095189501388359}
   - component: {fileID: 4967497223130498187}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: SnowBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -259,6 +260,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2448041421190166301}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2434007581929723898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4791351454148079244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97d7b09c08e831944921082f8d18f6e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &2471327447532460467
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -428,9 +441,10 @@ GameObject:
   - component: {fileID: 4767220239559152971}
   - component: {fileID: 2271045565057111925}
   - component: {fileID: 1611895285556267730}
+  - component: {fileID: 8218632372048092096}
   m_Layer: 0
   m_Name: SnowBall
-  m_TagString: Untagged
+  m_TagString: SnowBall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -479,7 +493,7 @@ Rigidbody:
   m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &4767220239559152971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -552,6 +566,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4967497223130498187}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
       m_Calls:
@@ -595,6 +621,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: SnowballThrow, Assembly-CSharp
         m_MethodName: OnRelease
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4967497223130498187}
+        m_TargetAssemblyTypeName: UnityEngine.Collider, UnityEngine
+        m_MethodName: set_isTrigger
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -714,3 +752,17 @@ MonoBehaviour:
   _linearDamping: 0.4
   _angularDamping: 5
   _yThrowModifier: 3
+--- !u!114 &8218632372048092096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8475854945498553369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c001ca6f3c4565b49bce939d81928aa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snowBlockPrefab: {fileID: 83855024869560187, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
+  _mergeCooldown: 0.1
