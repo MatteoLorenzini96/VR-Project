@@ -2620,7 +2620,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: _delayBetweenWaves
-      value: 1
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: _wavesData.Array.size
