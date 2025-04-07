@@ -2423,7 +2423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4193597127314851687, guid: 8c056f5aba205c643994045d75097604, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2.25
       objectReference: {fileID: 0}
     - target: {fileID: 4193597127314851687, guid: 8c056f5aba205c643994045d75097604, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2473,6 +2473,10 @@ PrefabInstance:
     - target: {fileID: 338827479826715529, guid: b4490069e5ca31a4aa100811fb9aa388, type: 3}
       propertyPath: m_Name
       value: TargetHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 338827479826715529, guid: b4490069e5ca31a4aa100811fb9aa388, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7527782451374161765, guid: b4490069e5ca31a4aa100811fb9aa388, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2569,7 +2573,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: _delayBetweenWaves
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: _wavesData.Array.size
@@ -2609,7 +2613,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7496442073348581602, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
