@@ -272,6 +272,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d7b09c08e831944921082f8d18f6e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _snowBallImpactVFXName: SnowBallImpactEffect
+  _snowBallImpactSFXName: SnowBallImpactSound
 --- !u!33 &2471327447532460467
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -747,11 +749,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _grabInteractable: {fileID: 4767220239559152971}
   _snowballRigidbody: {fileID: 4532202330006507728}
-  _maxThrowSpeed: 12
-  _throwStrengthMultiplier: 3
+  _maxThrowSpeed: 15
+  _throwStrengthMultiplier: 5
   _linearDamping: 0.4
   _angularDamping: 5
-  _yThrowModifier: 3
+  _yThrowModifier: 1.5
+  _velocitySmoothingFactor: 0.1
 --- !u!114 &8218632372048092096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -765,4 +768,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _snowBlockPrefab: {fileID: 83855024869560187, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
-  _mergeCooldown: 0.1
