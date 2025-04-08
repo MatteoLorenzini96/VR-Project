@@ -85,10 +85,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9111584394165884763}
+        m_TargetAssemblyTypeName: OnPositionVFXandSFX, Assembly-CSharp
+        m_MethodName: DoPositioningSFXandVFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9111584394165884763}
+        m_TargetAssemblyTypeName: OnPositionVFXandSFX, Assembly-CSharp
+        m_MethodName: DoTakingSFXandVFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_StartingHoverFilters:
   - {fileID: 2423551476153849882}
   m_StartingSelectFilters:
@@ -142,6 +166,9 @@ GameObject:
   - component: {fileID: 4274894618306308743}
   - component: {fileID: 5503725088914920111}
   - component: {fileID: 6319544428393972783}
+  - component: {fileID: 533149779556580814}
+  - component: {fileID: 1743106529742613542}
+  - component: {fileID: 9111584394165884763}
   m_Layer: 0
   m_Name: SnowBlock
   m_TagString: SnowBlock
@@ -339,6 +366,52 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetObject: {fileID: 3858681046550310982}
+--- !u!114 &533149779556580814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83855024869560187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 032046faaec875c44b4e8de3b362642a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lives: 3
+--- !u!114 &1743106529742613542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83855024869560187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0667f5dd0d6c504386c50abcdc9a941, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snowBlockCreationVFXName: SnowBlockCreationEffect
+  _snowBlockCreationSFXName: SnowBlockCreationSound
+  _snowBlockDamagedSFXName: SnowBlockDamagedSound
+  _snowBlockDestructionVFXName: SnowBlockDestructionEffect
+  _snowBlockDestructionSFXName: SnowBlockDestructionSound
+--- !u!114 &9111584394165884763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 83855024869560187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da0817d3257ddb844bd5de43709dc294, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _snowBlockPositioningVFXName: SnowBlockPositioningEffect
+  _snowBlockPositioningSFXName: SnowBlockPositioningSound
+  _snowBlockTakingVFXName: SnowBlockTakingEffect
+  _snowBlockTakingSFXName: SnowBlockTakingSound
 --- !u!1 &484721423609976755
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,10 +645,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9111584394165884763}
+        m_TargetAssemblyTypeName: OnPositionVFXandSFX, Assembly-CSharp
+        m_MethodName: DoPositioningSFXandVFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9111584394165884763}
+        m_TargetAssemblyTypeName: OnPositionVFXandSFX, Assembly-CSharp
+        m_MethodName: DoTakingSFXandVFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_StartingHoverFilters:
   - {fileID: 2423551476153849882}
   m_StartingSelectFilters:
@@ -629,6 +726,7 @@ GameObject:
   - component: {fileID: 2573282998914660098}
   - component: {fileID: 8477897558168495691}
   - component: {fileID: 6806734201468168282}
+  - component: {fileID: 8405441615224149121}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -725,6 +823,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8405441615224149121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5912731091775607053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 626d5ff9e7c53074ab8d1234ad04db15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6931817358270133843
 GameObject:
   m_ObjectHideFlags: 0
@@ -1035,10 +1145,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9111584394165884763}
+        m_TargetAssemblyTypeName: OnPositionVFXandSFX, Assembly-CSharp
+        m_MethodName: DoPositioningSFXandVFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9111584394165884763}
+        m_TargetAssemblyTypeName: OnPositionVFXandSFX, Assembly-CSharp
+        m_MethodName: DoTakingSFXandVFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_StartingHoverFilters:
   - {fileID: 2423551476153849882}
   m_StartingSelectFilters:

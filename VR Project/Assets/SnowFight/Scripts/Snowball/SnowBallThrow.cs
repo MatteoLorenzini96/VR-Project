@@ -67,8 +67,8 @@ public class SnowballThrow : MonoBehaviour
         // Applica la forza alla palla
         _snowballRigidbody.linearVelocity = throwForce;
 
-        // Aggiungi un po' di rotazione per rendere il lancio più naturale
+       /* // Aggiungi un po' di rotazione per rendere il lancio più naturale
         float spinStrength = 2f;  // Regola questo valore per un effetto di rotazione più o meno forte
-        _snowballRigidbody.AddTorque(Vector3.Cross(_throwDirection, Vector3.up) * spinStrength);
+        _snowballRigidbody.AddTorque(Vector3.Cross(_throwDirection, Vector3.up) * spinStrength);*/
     }
 }
