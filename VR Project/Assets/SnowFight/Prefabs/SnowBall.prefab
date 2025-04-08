@@ -767,4 +767,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c001ca6f3c4565b49bce939d81928aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _snowBlockPrefab: {fileID: 83855024869560187, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
+  _snowBlockPrefab: {fileID: 2499872994415908034, guid: cf902a6f2b59a78449b4a749c28e8389, type: 3}
