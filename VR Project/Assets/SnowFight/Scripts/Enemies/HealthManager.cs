@@ -37,18 +37,10 @@ public class HealthManager : MonoBehaviour
         {
             _turretAI.HandleDamage();
         }
-
-        if (lives <= 0)
+        else if (_bombAI != null)
         {
-            if (_bombAI != null)
-            {
-                _bombAI.Explode();
-            }
-
-            else
-            {
-                Debug.LogWarning("Nessuna logica di distruzione definita!");
-            }
+            _bombAI.Explode();
         }
+       
     }
 }
