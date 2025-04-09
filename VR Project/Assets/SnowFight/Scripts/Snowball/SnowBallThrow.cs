@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using UnityEngine.XR.Interaction.Toolkit.Interactables;
+using UnityEngine.XR.Interaction.Toolkit.Interactors;
+
 
 public class SnowballThrow : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class SnowballThrow : MonoBehaviour
     private Vector3 _throwDirection;   // Direzione del lancio
     private Vector3 _throwVelocity;    // Velocità della mano durante il movimento
     private Vector3 _smoothedThrowVelocity; // Velocità smussata della mano
+    private bool _wasGrabbedLastFrame = false;
 
     private void Start()
     {
@@ -39,17 +42,39 @@ public class SnowballThrow : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Solo se l'oggetto è in fase di presa (non rilasciato)
-        if (_grabInteractable.isSelected)
+        bool isGrabbed = _grabInteractable.isSelected;
+
+        // Se l'oggetto è appena stato preso (passaggio da non preso a preso)
+        if (isGrabbed && !_wasGrabbedLastFrame)
         {
-            // Calcola la velocità della mano durante il movimento (posizione corrente - posizione precedente)
+            OnGrab(); // Azzera tutto
+        }
+
+        if (isGrabbed)
+        {
+            // Calcola la velocità della mano durante il movimento
             _throwVelocity = (transform.position - _previousPosition) / Time.deltaTime;
 
-            // Applicare il filtro per smussare la velocità
+            // Smussa la velocità
             _smoothedThrowVelocity = Vector3.Lerp(_smoothedThrowVelocity, _throwVelocity, _velocitySmoothingFactor);
 
             _previousPosition = transform.position;
         }
+
+        // Aggiorna lo stato per il prossimo frame
+        _wasGrabbedLastFrame = isGrabbed;
+    }
+
+
+    public void OnGrab()
+    {
+        // Azzera le velocità e la direzione del lancio
+        _smoothedThrowVelocity = Vector3.zero;
+        _throwVelocity = Vector3.zero;
+        _throwDirection = Vector3.zero;
+
+        // Aggiorna la posizione precedente alla posizione attuale per evitare salti di velocità
+        _previousPosition = transform.position;
     }
 
     // Questo metodo deve essere chiamato quando l'oggetto viene rilasciato
