@@ -6,7 +6,6 @@ public class SnowballMerge : MonoBehaviour
 {
     [Header("Merge Settings")]
     [SerializeField] private GameObject _snowBlockPrefab;
-    //[SerializeField] private float _mergeCooldown = .1f;
 
     private XRGrabInteractable _grabInteractable;
     private bool _isGrabbed;
@@ -39,7 +38,6 @@ public class SnowballMerge : MonoBehaviour
 
     public void HandleTriggerWith(GameObject other)
     {
-        //if (Time.time - _lastMergeTime < _mergeCooldown) return;
         //Debug.Log("" + _isGrabbed);
         if (!_isGrabbed) return;
 

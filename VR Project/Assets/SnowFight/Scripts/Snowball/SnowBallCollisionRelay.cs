@@ -23,5 +23,14 @@ public class SnowballTriggerRelay : MonoBehaviour
     {
         VFXManager.Instance.SpawnEffect(_snowBallImpactVFXName, transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySFX(_snowBallImpactSFXName);
+
+        if (transform.parent != null)
+        {
+            Destroy(transform.parent.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
