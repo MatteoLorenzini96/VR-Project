@@ -26,6 +26,11 @@ public class WaveManager : MonoBehaviour
 
         _enemiesParent = new GameObject("Enemies").transform;
         FindSpawnerPositions();
+        //ActivateWaves();
+    }
+
+    public void ActivateWaves()
+    {
         StartCoroutine(StartWave());
     }
 
