@@ -44,4 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d67f959d3f78b43499f609789274371e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectsList: []
+  effectsList:
+  - effectName: SnowBallImpactEffect
+    effectPrefab: {fileID: 0}
+  - effectName: SnowBlockCreationEffect
+    effectPrefab: {fileID: 0}
+  - effectName: SnowBlockDestructionEffect
+    effectPrefab: {fileID: 0}
+  - effectName: TurretShootEffect
+    effectPrefab: {fileID: 0}
+  - effectName: TurretCreationEffect
+    effectPrefab: {fileID: 0}
+  - effectName: TurretDestructionEffect
+    effectPrefab: {fileID: 0}
+  - effectName: BulletDestructionEffect
+    effectPrefab: {fileID: 0}
+  - effectName: BombExplosionEffect
+    effectPrefab: {fileID: 0}
