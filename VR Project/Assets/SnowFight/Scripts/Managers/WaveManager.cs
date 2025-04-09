@@ -6,6 +6,7 @@ using System.Linq;
 public class WaveManager : MonoBehaviour
 {
     [Header("Waves Settings")]
+    [SerializeField] private bool _ignoreTutorial = false;
     [SerializeField] private bool _waitBeforeFirstWave = false;
     [SerializeField] private float _delayBetweenWaves = 15f;
     [SerializeField] private List<Transform> _spawnPoints;
@@ -18,6 +19,8 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        FindSpawnerPositions();
+
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (_player == null)
         {
@@ -25,8 +28,11 @@ public class WaveManager : MonoBehaviour
         }
 
         _enemiesParent = new GameObject("Enemies").transform;
-        FindSpawnerPositions();
-        //ActivateWaves();
+        
+        if (_ignoreTutorial)
+        {
+            StartCoroutine(StartWave());
+        }
     }
 
     public void ActivateWaves()
