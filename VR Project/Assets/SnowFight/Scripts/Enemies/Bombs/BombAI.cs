@@ -6,9 +6,12 @@ public class BombAI : MonoBehaviour
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _explosionRadius = 1.5f;
 
-    [Header("VFX and SFX")]
-    [SerializeField] private string _explosionVFXName = "ExplosionEffect";
-    [SerializeField] private string _explosionSFXName = "ExplosionSound";
+    [Header("Ticking SFX")]
+    [SerializeField] private string _bombTickingSFXName = "BombTickingSound";
+
+    [Header("Explosion VFX and SFX")]
+    [SerializeField] private string _bombExplosionVFXName = "BombExplosionEffect";
+    [SerializeField] private string _bombExplosionSFXName = "BombExplosionSound";
 
     public bool isMoving = true;
 
@@ -17,10 +20,13 @@ public class BombAI : MonoBehaviour
     private bool _isExploding = false;
     private SphereCollider _explosionCollider;
 
+    private AudioSource _tickingAudioSource;
+
     private void Start()
     {
         SearchForPlayer();
         SearchForIdentifier();
+        PlayTickingSound();
     }
 
     private void FixedUpdate()
@@ -28,6 +34,7 @@ public class BombAI : MonoBehaviour
         if (_playerTransform != null && !_isExploding && isMoving)
         {
             MoveTowardsPlayer();
+            UpdateTickingSound();
         }
     }
 
@@ -54,6 +61,32 @@ public class BombAI : MonoBehaviour
         }
     }
 
+    private void PlayTickingSound()
+    {
+        // Usa AudioManager per iniziare a riprodurre il suono di ticking
+        AudioManager.Instance.PlaySFX(_bombTickingSFXName);
+
+        // Trova l'AudioSource attualmente in uso dal AudioManager
+        _tickingAudioSource = AudioManager.Instance.sfxSource; // Assumendo che sfxSource stia riproducendo il suono
+        if (_tickingAudioSource == null)
+        {
+            Debug.LogWarning("Nessun AudioSource trovato per il ticking sound!");
+        }
+    }
+
+    private void UpdateTickingSound()
+    {
+        if (_tickingAudioSource != null && _playerTransform != null)
+        {
+            // Calcola la distanza tra la bomba e il giocatore
+            float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
+
+            // Aggiorna pitch e velocità in base alla distanza (più vicino = più veloce)
+            float pitchMultiplier = Mathf.Clamp(1f / distanceToPlayer, 1f, 3f); // Configura i valori limite come preferito
+            _tickingAudioSource.pitch = pitchMultiplier; // Modifica la velocità di riproduzione
+        }
+    }
+
     private void MoveTowardsPlayer()
     {
         Vector3 directionToPlayer = (_playerTransform.position - transform.position).normalized;
@@ -62,7 +95,6 @@ public class BombAI : MonoBehaviour
 
     public void TargetReached()
     {
-        //Debug.Log("Bersaglio raggiunto - Movimento fermato.");
         isMoving = false;
         Explode();
     }
@@ -79,11 +111,16 @@ public class BombAI : MonoBehaviour
         if (_isExploding) return;
         _isExploding = true;
 
-        //Debug.Log("Esplosione avvenuta");
-        VFXManager.Instance.SpawnEffect(_explosionVFXName, transform.position, Quaternion.identity);
-        AudioManager.Instance.PlaySFX(_explosionSFXName);
-        ExplosionCheck();
+        // Ferma il suono di ticking
+        if (_tickingAudioSource != null)
+        {
+            _tickingAudioSource.Stop();
+        }
 
+        VFXManager.Instance.SpawnEffect(_bombExplosionVFXName, transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySFX(_bombExplosionSFXName);
+
+        ExplosionCheck();
         _enemyIdentifier.DestroyEnemy();
     }
 
