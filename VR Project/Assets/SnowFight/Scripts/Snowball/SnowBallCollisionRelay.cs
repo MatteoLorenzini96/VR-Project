@@ -23,12 +23,16 @@ public class SnowballTriggerRelay : MonoBehaviour
     {
         // Debug.Log("SnowBall ha colpito " + collision.gameObject.name);
 
-        VFXManager.Instance?.SpawnEffect(_snowBallImpactVFXName, transform.position, Quaternion.identity);
-        AudioManager.Instance?.PlaySFX(_snowBallImpactSFXName);
-
         if (!collision.gameObject.CompareTag("SnowBall"))
         {
+            DoDeathVFXandSFX();
             Destroy(gameObject);
         }
+    }
+
+    public void DoDeathVFXandSFX()
+    {
+        VFXManager.Instance?.SpawnEffect(_snowBallImpactVFXName, transform.position, Quaternion.identity);
+        AudioManager.Instance?.PlaySFX(_snowBallImpactSFXName);
     }
 }
