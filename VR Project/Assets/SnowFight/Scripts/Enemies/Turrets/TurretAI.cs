@@ -88,7 +88,7 @@ public class TurretAI : MonoBehaviour
             HandleMovement();
         }
 
-        else return;        
+        else return;
     }
 
     private void HandleMovement()

@@ -27,7 +27,7 @@ public class HealthManager : MonoBehaviour
         lives--;
 
         Debug.Log($"{gameObject.name} ha subito un colpo. Vite rimaste: {lives}");
-        
+
         if (_snowBlockHealth != null)
         {
             _snowBlockHealth.GettingDamaged();
@@ -44,7 +44,7 @@ public class HealthManager : MonoBehaviour
             {
                 _bombAI.Explode();
             }
-            
+
             else
             {
                 Debug.LogWarning("Nessuna logica di distruzione definita!");

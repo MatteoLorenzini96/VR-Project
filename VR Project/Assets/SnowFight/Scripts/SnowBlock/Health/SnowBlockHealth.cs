@@ -18,7 +18,7 @@ public class SnowBlockHealth : MonoBehaviour
     private void Start()
     {
         _healthManager = GetComponent<HealthManager>();
-        
+
         VFXManager.Instance.SpawnEffect(_snowBlockCreationVFXName, transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySFX(_snowBlockCreationSFXName);
     }

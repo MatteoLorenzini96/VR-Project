@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     [Header("Max Lifetime")]
     [SerializeField] private float _lifeTime = 15f;
-    
+
     private Rigidbody _rigidbody;
     private bool _isDead = false;
 
