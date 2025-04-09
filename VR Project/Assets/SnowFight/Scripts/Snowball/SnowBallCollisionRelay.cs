@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SnowballTriggerRelay : MonoBehaviour
 {
-    private SnowballMerge _parentMergeScript;
+    private SnowballMerge _mergeScript;
 
     [Header("VFX and SFX")]
     [SerializeField] private string _snowBallImpactVFXName = "SnowBallImpactEffect";
@@ -10,25 +10,23 @@ public class SnowballTriggerRelay : MonoBehaviour
 
     private void Awake()
     {
-        _parentMergeScript = GetComponentInParent<SnowballMerge>();
+        _mergeScript = GetComponent<SnowballMerge>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        _parentMergeScript?.HandleTriggerWith(other.gameObject);
-        //Debug.Log("Trigger rilevato con " + other.gameObject);
+        _mergeScript?.HandleTriggerWith(other.gameObject);
+        // Debug.Log("Trigger rilevato con " + other.gameObject.name);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        VFXManager.Instance.SpawnEffect(_snowBallImpactVFXName, transform.position, Quaternion.identity);
-        AudioManager.Instance.PlaySFX(_snowBallImpactSFXName);
+        // Debug.Log("SnowBall ha colpito " + collision.gameObject.name);
 
-        if (transform.parent != null)
-        {
-            Destroy(transform.parent.gameObject);
-        }
-        else
+        VFXManager.Instance?.SpawnEffect(_snowBallImpactVFXName, transform.position, Quaternion.identity);
+        AudioManager.Instance?.PlaySFX(_snowBallImpactSFXName);
+
+        if (!collision.gameObject.CompareTag("SnowBall"))
         {
             Destroy(gameObject);
         }
