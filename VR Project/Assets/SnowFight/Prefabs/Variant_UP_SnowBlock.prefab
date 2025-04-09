@@ -44,17 +44,21 @@ PrefabInstance:
       propertyPath: m_SecondaryAttachTransform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8477897558168495691, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: ddc5fded5fa9f7344b591a0b18074f2e, type: 2}
     - target: {fileID: 8662548899530633596, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.14448054
       objectReference: {fileID: 0}
     - target: {fileID: 8662548899530633596, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.276
       objectReference: {fileID: 0}
     - target: {fileID: 8662548899530633596, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.3998345
       objectReference: {fileID: 0}
     - target: {fileID: 8662548899530633596, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
       propertyPath: m_LocalRotation.w
