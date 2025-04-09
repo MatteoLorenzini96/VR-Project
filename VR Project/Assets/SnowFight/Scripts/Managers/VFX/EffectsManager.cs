@@ -56,12 +56,20 @@ public class VFXManager : MonoBehaviour
     {
         if (effectsDictionary.TryGetValue(effectName, out var effectPrefab))
         {
-            return Instantiate(effectPrefab, position, rotation); // Restituisci l'oggetto istanziato
+            if (effectPrefab != null)
+            {
+                return Instantiate(effectPrefab, position, rotation);
+            }
+            else
+            {
+                Debug.LogWarning($"Il prefab associato a '{effectName}' è null. L'effetto non verrà istanziato.");
+                return null;
+            }
         }
         else
         {
-            Debug.LogError($"Effetto non trovato: {effectName}. Assicurati che il nome sia corretto e che l'effetto sia aggiunto alla lista.");
-            return null; // Restituisci null se l'effetto non è trovato
+            Debug.LogWarning($"Effetto non trovato: '{effectName}'. Assicurati che sia nella lista del VFXManager.");
+            return null;
         }
     }
 
