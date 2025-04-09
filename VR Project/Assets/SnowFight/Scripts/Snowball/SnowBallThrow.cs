@@ -79,7 +79,7 @@ public class SnowballThrow : MonoBehaviour
         _snowballRigidbody.AddTorque(spinDirection * spinStrength);*/
 
         // Log per il debug
-        Debug.Log("Throw Direction: " + _throwDirection);
-        Debug.Log("Smoothed Throw Velocity: " + _smoothedThrowVelocity);
+        //Debug.Log("Throw Direction: " + _throwDirection);
+        //Debug.Log("Smoothed Throw Velocity: " + _smoothedThrowVelocity);
     }
 }
