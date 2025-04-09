@@ -16,21 +16,37 @@ public class TurretAI : MonoBehaviour
     [SerializeField] private float _bulletSpeed = 10f;
     [SerializeField] private float _normalCooldown = 3f; // Cooldown fisso
     [SerializeField] private float _targetUpdateInterval = 1f;
+    [Header("Shooting VFX and SFX")]
+    [SerializeField] private string _turretShootVFXName = "TurretShootEffect";
+    [SerializeField] private string _turretShootSFXName = "TurretShootSound";
 
     [Header("Is Cooldown Random?")]
     [SerializeField] private bool _randomCooldown = false; // Se true, cooldown random, altrimenti fisso
     [SerializeField] private float _shootCooldownMin = 2f;
     [SerializeField] private float _shootCooldownMax = 5f;
 
+    [Header("Creazione VFX and SFX")]
+    [SerializeField] private string _turretCreationVFXName = "TurretCreationEffect";
+    [SerializeField] private string _turretCreationSFXName = "TurretCreationSound";
+
+    [Header("Distruzione VFX and SFX")]
+    [SerializeField] private string _turretDestructionVFXName = "TurretDestructionEffect";
+    [SerializeField] private string _turretDestructionSFXName = "TurretDestructionSound";
+
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
     private bool _movingToTarget = true;
     private Transform _playerTransform;
     private EnemyIdentifier _enemyIdentifier;
+    private HealthManager _healthManager;
 
     private void Start()
     {
+        SearchHealthManager();
         SearchForIdentifier();
+
+        VFXManager.Instance.SpawnEffect(_turretCreationVFXName, transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySFX(_turretCreationSFXName);
 
         _startPosition = transform.position;
         _targetPosition = _startPosition + _movementOffset;
@@ -38,6 +54,11 @@ public class TurretAI : MonoBehaviour
         LookAtPlayer();
         StartCoroutine(UpdateTarget());
         StartCoroutine(ShootAtPlayer());
+    }
+
+    private void SearchHealthManager()
+    {
+        _healthManager = GetComponent<HealthManager>();
     }
 
     private void SearchForIdentifier()
@@ -108,6 +129,9 @@ public class TurretAI : MonoBehaviour
                     Vector3 direction = (_playerTransform.position - firePoint.position).normalized;
                     GameObject bulletInstance = Instantiate(_bulletPrefab, firePoint.position, Quaternion.identity);
 
+                    VFXManager.Instance.SpawnEffect(_turretShootVFXName, transform.position, Quaternion.identity);
+                    AudioManager.Instance.PlaySFX(_turretShootSFXName);
+
                     Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
                     if (bulletScript != null)
                     {
@@ -122,6 +146,25 @@ public class TurretAI : MonoBehaviour
             {
                 yield return null;
             }
+        }
+    }
+
+    public void HandleDamage()
+    {
+        switch (_healthManager.lives)
+        {
+            case 0:
+                //Debug.Log("Vita 0: Il blocco è distrutto!");
+
+                VFXManager.Instance.SpawnEffect(_turretDestructionVFXName, transform.position, Quaternion.identity);
+                AudioManager.Instance.PlaySFX(_turretDestructionSFXName);
+
+                HandleDestruction();
+
+                break;
+            default:
+                Debug.Log("Valore di lives non valido.");
+                break;
         }
     }
 

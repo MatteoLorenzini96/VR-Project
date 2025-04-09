@@ -33,6 +33,10 @@ public class HealthManager : MonoBehaviour
             _snowBlockHealth.GettingDamaged();
             return;
         }
+        else if (_turretAI != null)
+        {
+            _turretAI.HandleDamage();
+        }
 
         if (lives <= 0)
         {
@@ -40,10 +44,7 @@ public class HealthManager : MonoBehaviour
             {
                 _bombAI.Explode();
             }
-            else if (_turretAI != null)
-            {
-                _turretAI.HandleDestruction();
-            }
+            
             else
             {
                 Debug.LogWarning("Nessuna logica di distruzione definita!");
