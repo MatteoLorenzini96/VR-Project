@@ -129,7 +129,7 @@ public class TurretAI : MonoBehaviour
                     Vector3 direction = (_playerTransform.position - firePoint.position).normalized;
                     GameObject bulletInstance = Instantiate(_bulletPrefab, firePoint.position, Quaternion.identity);
 
-                    VFXManager.Instance.SpawnEffect(_turretShootVFXName, transform.position, Quaternion.identity);
+                    VFXManager.Instance.SpawnEffect(_turretShootVFXName, firePoint.position, Quaternion.identity);
                     AudioManager.Instance.PlaySFX(_turretShootSFXName);
 
                     Bullet bulletScript = bulletInstance.GetComponent<Bullet>();
