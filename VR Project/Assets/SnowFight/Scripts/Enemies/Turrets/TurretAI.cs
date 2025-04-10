@@ -44,7 +44,10 @@ public class TurretAI : MonoBehaviour
     {
         SearchHealthManager();
         SearchForIdentifier();
+    }
 
+    public void ActivateTurret()
+    {
         VFXManager.Instance.SpawnEffect(_turretCreationVFXName, transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySFX(_turretCreationSFXName);
 

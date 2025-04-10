@@ -12,6 +12,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private List<Transform> _spawnPoints;
     [SerializeField] private List<SpawnerData> _wavesData;
 
+    [Header("Spawn Offset Settings")]
+    [SerializeField] private float _spawnOffsetDistance = 20f;
+
     private int _currentWaveIndex = 0;
     private Transform _player;
     private Transform _enemiesParent;
@@ -105,8 +108,18 @@ public class WaveManager : MonoBehaviour
         int spawnedEnemies = 0;
         for (int i = 0; i < currentWave._enemies.Length; i++)
         {
-            GameObject enemy = Instantiate(currentWave._enemies[i], spawnPointsForWave[i].position, Quaternion.identity, _enemiesParent);
-            enemy.GetComponent<EnemyIdentifier>().SetWaveManager(this);
+            Vector3 targetPosition = spawnPointsForWave[i].position;
+
+            // Calcola direzione opposta al player
+            Vector3 directionFromPlayer = (targetPosition - _player.position).normalized;
+            Vector3 spawnPosition = targetPosition + directionFromPlayer * _spawnOffsetDistance;
+
+            GameObject enemy = Instantiate(currentWave._enemies[i], spawnPosition, Quaternion.identity, _enemiesParent);
+
+            EnemyIdentifier enemyScript = enemy.GetComponent<EnemyIdentifier>();
+            enemyScript.SetWaveManager(this);
+            enemyScript.SetArrivalPoint(targetPosition); // passiamo il punto d'arrivo
+
             spawnedEnemies++;
         }
 
