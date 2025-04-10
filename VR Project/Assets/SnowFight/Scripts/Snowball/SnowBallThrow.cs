@@ -23,6 +23,7 @@ public class SnowballThrow : MonoBehaviour
     private Vector3 _throwVelocity;    // Velocità della mano durante il movimento
     private Vector3 _smoothedThrowVelocity; // Velocità smussata della mano
     private bool _wasGrabbedLastFrame = false;
+    public bool firstTimeGrabbed = false;
 
     private void Start()
     {
@@ -75,6 +76,8 @@ public class SnowballThrow : MonoBehaviour
 
         // Aggiorna la posizione precedente alla posizione attuale per evitare salti di velocità
         _previousPosition = transform.position;
+
+        firstTimeGrabbed = true;
     }
 
     // Questo metodo deve essere chiamato quando l'oggetto viene rilasciato
