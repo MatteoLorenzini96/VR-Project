@@ -8,9 +8,12 @@ public class SnowballTriggerRelay : MonoBehaviour
     [SerializeField] private string _snowBallImpactVFXName = "SnowBallImpactEffect";
     [SerializeField] private string _snowBallImpactSFXName = "SnowBallImpactSound";
 
+    private SnowballThrow _snowballThrow;
+
     private void Awake()
     {
         _mergeScript = GetComponent<SnowballMerge>();
+        _snowballThrow = GetComponent<SnowballThrow>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -23,7 +26,7 @@ public class SnowballTriggerRelay : MonoBehaviour
     {
         // Debug.Log("SnowBall ha colpito " + collision.gameObject.name);
 
-        if (!collision.gameObject.CompareTag("SnowBall"))
+        if (!collision.gameObject.CompareTag("SnowBall") && _snowballThrow.firstTimeGrabbed)
         {
             DoDeathVFXandSFX();
             Destroy(gameObject);
