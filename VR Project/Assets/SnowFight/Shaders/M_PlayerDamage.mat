@@ -61,7 +61,7 @@ Material:
     - _Power: 5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _VignetteIntensity: 2
+    - _VignetteIntensity: 0
     - _VignettePower: 1.5
     - _VoronoiIntensity: 1
     - _VoronoiPower: 3.15

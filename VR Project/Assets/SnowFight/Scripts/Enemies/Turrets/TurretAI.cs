@@ -76,7 +76,7 @@ public class TurretAI : MonoBehaviour
 
     private void LookAtPlayer()
     {
-        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        GameObject playerObject = GameObject.FindGameObjectWithTag("PlayerPoint");
         if (playerObject)
         {
             _playerTransform = playerObject.transform;
@@ -111,7 +111,7 @@ public class TurretAI : MonoBehaviour
         {
             if (_playerTransform == null)
             {
-                GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+                GameObject playerObject = GameObject.FindGameObjectWithTag("PlayerPoint");
                 if (playerObject)
                 {
                     _playerTransform = playerObject.transform;

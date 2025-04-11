@@ -8,6 +8,7 @@ TagManager:
   - SnowBlock
   - SnowBall
   - Bullet
+  - PlayerPoint
   layers:
   - Default
   - TransparentFX

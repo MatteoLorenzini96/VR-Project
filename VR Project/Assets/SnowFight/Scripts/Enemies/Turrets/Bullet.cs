@@ -37,6 +37,7 @@ public class Bullet : MonoBehaviour
             if (healthManager != null)
             {
                 healthManager.TakeDamage();
+                //Debug.Log("Colpito");
             }
             else
             {

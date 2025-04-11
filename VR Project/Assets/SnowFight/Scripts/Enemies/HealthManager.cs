@@ -9,6 +9,7 @@ public class HealthManager : MonoBehaviour
     private TurretAI _turretAI;
     private SnowBlockHealth _snowBlockHealth;
     private TutorialTurret _tutorialTurret;
+    private PlayerHealthController _playerHealthController;
 
     private void Start()
     {
@@ -16,11 +17,12 @@ public class HealthManager : MonoBehaviour
         _turretAI = GetComponent<TurretAI>();
         _snowBlockHealth = GetComponent<SnowBlockHealth>();
         _tutorialTurret = GetComponent<TutorialTurret>();
+        _playerHealthController = GetComponent<PlayerHealthController>();
 
 
-        if (_bombAI == null && _turretAI == null && _snowBlockHealth == null && _tutorialTurret == null)
+        if (_bombAI == null && _turretAI == null && _snowBlockHealth == null && _tutorialTurret == null && _playerHealthController == null)
         {
-            Debug.LogWarning("Né BombAI né TurretAI né SnowBlockHealth nè TutorialTurret trovati su " + gameObject.name);
+            Debug.LogWarning("Né BombAI né TurretAI né SnowBlockHealth nè TutorialTurret nè PlayerHealthController trovati su " + gameObject.name);
         }
     }
 
@@ -47,5 +49,16 @@ public class HealthManager : MonoBehaviour
         {
             _tutorialTurret.ActivateWavesManager();
         }
+        else if (_playerHealthController != null)
+        {
+            _playerHealthController.GettingDamaged();
+        }
+    }
+
+    public void PlayerExploded()
+    {
+        lives -= 5;
+        _playerHealthController.GettingDamaged();
+        Debug.Log($"{gameObject.name} è esploso. Vite diminuite di 5. Vite attuali: {lives}");
     }
 }
