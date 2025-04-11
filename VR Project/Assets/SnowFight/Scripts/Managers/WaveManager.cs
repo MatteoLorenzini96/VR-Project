@@ -116,7 +116,7 @@ public class WaveManager : MonoBehaviour
             waveIndex++;
         }
 
-        Debug.Log("Spawn points raggruppati da Inspector.");
+        //Debug.Log("Spawn points raggruppati da Inspector.");
     }
 
     private IEnumerator StartWave()
@@ -174,7 +174,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator CheckRemainingEnemies()
     {
-        yield return new WaitForEndOfFrame();
+        yield return new WaitForSeconds(0.7f); 
         int remainingEnemies = FindObjectsByType<EnemyIdentifier>(FindObjectsSortMode.None).Length;
         Debug.Log("Enemies remaining: " + remainingEnemies);
 

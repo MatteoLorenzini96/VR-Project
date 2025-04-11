@@ -136,8 +136,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 2
   _explosionRadius: 1.5
-  _explosionVFXName: 
-  _explosionSFXName: 
+  _playerMaxDamage: 7
+  _playerMinDamage: 1
+  _snowBlockMaxDamage: 5
+  _snowBlockMinDamage: 1
+  _bombTickingSFXName: BombTickingSound
+  _bombExplosionVFXName: BombExplosionEffect
+  _bombExplosionSFXName: BombExplosionSound
   isMoving: 1
 --- !u!114 &8763766126515469341
 MonoBehaviour:
@@ -151,6 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b7333ad979e1ed46a57fecaa0047c48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _moveSpeed: 5
+  _arcHeight: 3
 --- !u!114 &748532816201324158
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -217,7 +224,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6567670384130871001
 MonoBehaviour:

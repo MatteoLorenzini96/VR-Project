@@ -6,6 +6,12 @@ public class BombAI : MonoBehaviour
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _explosionRadius = 1.5f;
 
+    [Header("Explosion Damage")]
+    [SerializeField] private int _playerMaxDamage = 5;
+    [SerializeField] private int _playerMinDamage = 1;
+    [SerializeField] private int _snowBlockMaxDamage = 3;
+    [SerializeField] private int _snowBlockMinDamage = 1;
+
     [Header("Ticking SFX")]
     [SerializeField] private string _bombTickingSFXName = "BombTickingSound";
 
@@ -130,10 +136,29 @@ public class BombAI : MonoBehaviour
 
         foreach (Collider obj in objectsInRange)
         {
-            if (obj.CompareTag("Player") || obj.CompareTag("SnowWall"))
+            float distance = Vector3.Distance(transform.position, obj.transform.position);
+            float distancePercentage = Mathf.Clamp01(distance / _explosionRadius);
+
+            int damage = 0;
+
+            if (obj.CompareTag("Player"))
             {
-                Debug.Log("Danno inflitto a " + obj.name);
-                // Qui puoi chiamare una funzione per infliggere danno agli oggetti colpiti
+                damage = Mathf.RoundToInt(Mathf.Lerp(_playerMaxDamage, _playerMinDamage, distancePercentage));
+            }
+            else if (obj.CompareTag("SnowWall") || obj.CompareTag("SnowBlock"))
+            {
+                damage = Mathf.RoundToInt(Mathf.Lerp(_snowBlockMaxDamage, _snowBlockMinDamage, distancePercentage));
+            }
+
+            if (damage > 0)
+            {
+                Debug.Log($"Danno inflitto a {obj.name}: {damage}");
+
+                HealthManager hm = obj.GetComponent<HealthManager>();
+                if (hm != null)
+                {
+                    hm.TakeExplosion(damage);
+                }
             }
         }
     }

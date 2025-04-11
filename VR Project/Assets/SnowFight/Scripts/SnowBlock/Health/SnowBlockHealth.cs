@@ -14,7 +14,7 @@ public class SnowBlockHealth : MonoBehaviour
     [SerializeField] private string _snowBlockDestructionSFXName = "SnowBlockDestructionSound";
 
     private HealthManager _healthManager;
-
+    
     private void Start()
     {
         _healthManager = GetComponent<HealthManager>();
@@ -43,6 +43,7 @@ public class SnowBlockHealth : MonoBehaviour
                 AudioManager.Instance.PlaySFX(_snowBlockDamagedSFXName);
                 // Puoi aggiungere il codice che desideri qui
                 break;
+
             case 0:
                 Debug.Log("Vita 0: Il blocco è distrutto!");
 

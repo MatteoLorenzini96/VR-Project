@@ -54,11 +54,22 @@ public class HealthManager : MonoBehaviour
             _playerHealthController.GettingDamaged();
         }
     }
-
-    public void PlayerExploded()
+    public void TakeExplosion(int damage)
     {
-        lives -= 5;
-        _playerHealthController.GettingDamaged();
-        Debug.Log($"{gameObject.name} è esploso. Vite diminuite di 5. Vite attuali: {lives}");
+        lives -= damage;
+        Debug.Log($"{gameObject.name} ha subito un'esplosione. Danno: {damage}. Vite rimaste: {lives}");
+
+        if (_snowBlockHealth != null)
+        {
+            _snowBlockHealth.GettingDamaged();
+            Debug.Log("Aggiorno la vita del Blocco");
+            return;
+        }
+        else if (_playerHealthController != null)
+        {
+            _playerHealthController.GettingDamaged();
+            Debug.Log("Aggiorno la vita del Player");
+            return;
+        }
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyIdentifier : MonoBehaviour
 {
@@ -67,7 +68,10 @@ public class EnemyIdentifier : MonoBehaviour
         // Qui puoi mettere quello che vuoi succeda quando atterra.
         // Tipo attivare un AI controller, animazione idle, ecc.
         //Debug.Log($"{gameObject.name} è atterrato nel punto di arrivo.");
-
+        if (_bombAI != null)
+        {
+            return;
+        }
         if (_turretAI != null) 
         {
             _turretAI.ActivateTurret();
@@ -78,6 +82,13 @@ public class EnemyIdentifier : MonoBehaviour
     public void DestroyEnemy()
     {
         _waveManager?.EnemyDied();
+        Debug.Log("Notifico la morte al WaveManager");
+        StartCoroutine(DestroyAfterDelay(.5f));
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }
 }
