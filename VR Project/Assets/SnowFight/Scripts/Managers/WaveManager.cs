@@ -3,13 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+[System.Serializable]
+public class NamedSpawnGroup
+{
+    public string parentName;               // il nome del padre
+    public List<Transform> spawnPoints = new List<Transform>();
+}
+
 public class WaveManager : MonoBehaviour
 {
     [Header("Waves Settings")]
     [SerializeField] private bool _ignoreTutorial = false;
     [SerializeField] private bool _waitBeforeFirstWave = false;
     [SerializeField] private float _delayBetweenWaves = 15f;
+
     [SerializeField] private List<Transform> _spawnPoints;
+
+    [Header("Debug - Spawn Points per Nome (solo visuale)")]
+    [SerializeField] private List<NamedSpawnGroup> _namedSpawnGroups = new List<NamedSpawnGroup>();
+
     [SerializeField] private List<SpawnerData> _wavesData;
 
     [Header("Spawn Offset Settings")]
@@ -18,7 +30,11 @@ public class WaveManager : MonoBehaviour
     private int _currentWaveIndex = 0;
     private Transform _player;
     private Transform _enemiesParent;
+
     private Dictionary<int, List<Transform>> _groupedSpawnPoints = new Dictionary<int, List<Transform>>();
+    private Dictionary<string, List<Transform>> _namedGroupedSpawnPoints = new Dictionary<string, List<Transform>>();
+
+    private float _elapsedTime = 0f;
 
     void Start()
     {
@@ -31,7 +47,7 @@ public class WaveManager : MonoBehaviour
         }
 
         _enemiesParent = new GameObject("Enemies").transform;
-        
+
         if (_ignoreTutorial)
         {
             StartCoroutine(StartWave());
@@ -45,6 +61,8 @@ public class WaveManager : MonoBehaviour
 
     void Update()
     {
+        _elapsedTime += Time.deltaTime;
+
         if (Input.GetKeyDown(KeyCode.Delete))
         {
             DebugKillAll();
@@ -62,26 +80,50 @@ public class WaveManager : MonoBehaviour
 
     private void FindSpawnerPositions()
     {
-        SpawnerIdentifier[] spawners = FindObjectsByType<SpawnerIdentifier>(FindObjectsSortMode.InstanceID).OrderBy(s => s.name).ToArray();
-        _spawnPoints.Clear();
         _groupedSpawnPoints.Clear();
+        _namedGroupedSpawnPoints.Clear();
+        _namedSpawnGroups.Clear();
 
-        for (int i = 0; i < spawners.Length; i++)
+        int waveIndex = 0;
+
+        foreach (Transform holder in _spawnPoints)
         {
-            List<Transform> groupedPoints = new List<Transform>();
-            foreach (Transform child in spawners[i].transform)
+            // Verifica che il Transform abbia uno SpawnerIdentifier
+            if (holder.GetComponent<SpawnerIdentifier>() == null)
             {
-                groupedPoints.Add(child);
+                Debug.LogWarning($"{holder.name} non ha uno SpawnerIdentifier, verrà ignorato.");
+                continue;
             }
-            _groupedSpawnPoints[i] = groupedPoints;
+
+            List<Transform> children = new List<Transform>();
+
+            foreach (Transform child in holder)
+            {
+                children.Add(child);
+            }
+
+            // Salva nei dizionari e nella lista per l'inspector
+            _groupedSpawnPoints[waveIndex] = children;
+            _namedGroupedSpawnPoints[holder.name] = children;
+
+            NamedSpawnGroup group = new NamedSpawnGroup
+            {
+                parentName = holder.name,
+                spawnPoints = children
+            };
+            _namedSpawnGroups.Add(group);
+
+            waveIndex++;
         }
+
+        Debug.Log("Spawn points raggruppati da Inspector.");
     }
 
     private IEnumerator StartWave()
     {
         if (_currentWaveIndex >= _wavesData.Count)
         {
-            Debug.Log("All waves completed!");
+            Debug.Log("All waves completed! " + _elapsedTime + " seconds.");
             yield break;
         }
 
@@ -110,7 +152,6 @@ public class WaveManager : MonoBehaviour
         {
             Vector3 targetPosition = spawnPointsForWave[i].position;
 
-            // Calcola direzione opposta al player
             Vector3 directionFromPlayer = (targetPosition - _player.position).normalized;
             Vector3 spawnPosition = targetPosition + directionFromPlayer * _spawnOffsetDistance;
 
@@ -118,12 +159,12 @@ public class WaveManager : MonoBehaviour
 
             EnemyIdentifier enemyScript = enemy.GetComponent<EnemyIdentifier>();
             enemyScript.SetWaveManager(this);
-            enemyScript.SetArrivalPoint(targetPosition); // passiamo il punto d'arrivo
+            enemyScript.SetArrivalPoint(targetPosition);
 
             spawnedEnemies++;
         }
 
-        Debug.Log("Wave " + _currentWaveIndex + " spawned " + spawnedEnemies + " enemies.");
+        Debug.Log("Wave " + _currentWaveIndex + " spawned " + spawnedEnemies + " enemies at " + _elapsedTime + " seconds.");
     }
 
     public void EnemyDied()

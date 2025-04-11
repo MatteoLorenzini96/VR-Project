@@ -178,7 +178,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &117585842
 Transform:
   m_ObjectHideFlags: 0
@@ -930,7 +930,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &616780881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2098,11 +2098,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!4 &1624226077 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2093205241223405562, guid: 8c056f5aba205c643994045d75097604, type: 3}
-  m_PrefabInstance: {fileID: 1325642862052846914}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1677034882
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2549,7 +2544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: _delayBetweenWaves
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: _spawnOffsetDistance
@@ -2574,7 +2569,7 @@ PrefabInstance:
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: '_wavesData.Array.data[1]'
       value: 
-      objectReference: {fileID: 11400000, guid: 1b945e5c28d176f4688534e898934b2f, type: 2}
+      objectReference: {fileID: 11400000, guid: 7451d25bc6afd0443b0554adb1d62a01, type: 2}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: '_wavesData.Array.data[2]'
       value: 
@@ -2586,7 +2581,7 @@ PrefabInstance:
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: '_spawnPoints.Array.data[1]'
       value: 
-      objectReference: {fileID: 1624226077}
+      objectReference: {fileID: 1080314447}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: '_spawnPoints.Array.data[2]'
       value: 
