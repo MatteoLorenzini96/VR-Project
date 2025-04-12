@@ -46,17 +46,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   effectsList:
   - effectName: SnowBallImpactEffect
-    effectPrefab: {fileID: 0}
+    effectPrefab: {fileID: 355767034952644806, guid: e3e64550c7ce4df4abf3d4eb3067dbc8, type: 3}
   - effectName: SnowBlockCreationEffect
-    effectPrefab: {fileID: 0}
+    effectPrefab: {fileID: 7886123227340320056, guid: 87df5dfe21700874f961473d63340f20, type: 3}
   - effectName: SnowBlockDestructionEffect
-    effectPrefab: {fileID: 0}
+    effectPrefab: {fileID: 8066145801856158121, guid: 5dfc95f164b169b4a96cb8743baf967c, type: 3}
+  - effectName: SnowBlockPositioningEffect
+    effectPrefab: {fileID: 9158486782692599735, guid: 92e23667ca2c43044b93bec3fb4cf3df, type: 3}
+  - effectName: SnowBlockTakingEffect
+    effectPrefab: {fileID: 8066145801856158121, guid: 402ee54f434e161429855a0082767d97, type: 3}
   - effectName: TurretShootEffect
-    effectPrefab: {fileID: 0}
+    effectPrefab: {fileID: 4472625565406523009, guid: 67c3483a606146d40a5920933ccf7e77, type: 3}
   - effectName: TurretCreationEffect
     effectPrefab: {fileID: 0}
   - effectName: TurretDestructionEffect
-    effectPrefab: {fileID: 0}
+    effectPrefab: {fileID: 2235298226428947281, guid: 55ffd2b668526df4f914ff47e340c590, type: 3}
   - effectName: BulletDestructionEffect
     effectPrefab: {fileID: 0}
   - effectName: BombExplosionEffect
