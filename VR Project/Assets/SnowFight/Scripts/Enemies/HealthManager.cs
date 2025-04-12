@@ -5,6 +5,7 @@ public class HealthManager : MonoBehaviour
 {
     public int lives = 1;
 
+    private int _maxLives;
     private BombAI _bombAI;
     private TurretAI _turretAI;
     private SnowBlockHealth _snowBlockHealth;
@@ -13,6 +14,7 @@ public class HealthManager : MonoBehaviour
 
     private void Start()
     {
+        _maxLives = lives;
         _bombAI = GetComponent<BombAI>();
         _turretAI = GetComponent<TurretAI>();
         _snowBlockHealth = GetComponent<SnowBlockHealth>();
@@ -71,5 +73,13 @@ public class HealthManager : MonoBehaviour
             Debug.Log("Aggiorno la vita del Player");
             return;
         }
+    }
+
+    public void HealthRecovery(int amount)
+    {
+        int oldLives = lives;
+        lives = Mathf.Min(lives + amount, _maxLives);
+        _playerHealthController.GettingDamaged();
+        Debug.Log($"{gameObject.name} ha recuperato {lives - oldLives} vite. Vite attuali: {lives}");
     }
 }

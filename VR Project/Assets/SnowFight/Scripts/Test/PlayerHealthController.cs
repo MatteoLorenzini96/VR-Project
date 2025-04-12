@@ -37,7 +37,7 @@ public class PlayerHealthController : MonoBehaviour
         UpdateVignette();
     }
 
-    public void UpdateVignette()
+    private void UpdateVignette()
     {
         if (_healthManager == null || vignetteMaterial == null)
             return;

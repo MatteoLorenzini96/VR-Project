@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class CurvedMovement : MonoBehaviour
+public class MoveToPlayer : MonoBehaviour
 {
     [Header("Target")]
     [SerializeField] private string _targetTag = "PlayerPoint";
@@ -20,6 +20,8 @@ public class CurvedMovement : MonoBehaviour
     private Vector3 _endPoint;
     private float _elapsedTime;
     private bool _canMove = false;
+    private GameObject _player;
+    private HealthManager _healthManager;
 
     private void Start()
     {
@@ -29,6 +31,17 @@ public class CurvedMovement : MonoBehaviour
         {
             Debug.LogWarning($"Nessun oggetto trovato con il tag '{_targetTag}'");
             return;
+        }
+
+        _player = GameObject.FindGameObjectWithTag("Player");
+        if (_player == null)
+        {
+            Debug.LogWarning("Player non trovato");
+            return;
+        }
+        else
+        {
+            _healthManager = GetComponent<HealthManager>();
         }
 
         _startPoint = transform.position;
@@ -56,7 +69,7 @@ public class CurvedMovement : MonoBehaviour
         }
 
         transform.position = fallTarget;
-        _startPoint = fallTarget; // aggiorniamo lo start point dopo la caduta
+        _startPoint = fallTarget;
         _canMove = true;
     }
 
@@ -70,9 +83,15 @@ public class CurvedMovement : MonoBehaviour
 
         if (t >= 1f)
         {
-            Debug.Log("Target raggiunto, distruzione oggetto.");
-            Destroy(gameObject);
+            PlayerReached();
         }
+    }
+
+    private void PlayerReached()
+    {
+        _healthManager.HealthRecovery(1);
+        Debug.Log("Target raggiunto, aggiungo 1 vita e mi distruggo oggetto.");
+        Destroy(gameObject);
     }
 
     private Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
