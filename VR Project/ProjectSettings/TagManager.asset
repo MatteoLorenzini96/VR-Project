@@ -9,6 +9,7 @@ TagManager:
   - SnowBall
   - Bullet
   - PlayerPoint
+  - Tutorial
   layers:
   - Default
   - TransparentFX

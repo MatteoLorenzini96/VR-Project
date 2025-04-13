@@ -1384,6 +1384,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       insertIndex: -1
       addedObject: {fileID: 117585842}
+    - targetCorrespondingSourceObject: {fileID: 1767192434, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1788993732}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1717954561962503725, guid: f6336ac4ac8b4d34bc5072418cdc62a0, type: 3}
       insertIndex: -1
@@ -2218,6 +2221,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2448041421190166301, guid: 0fdec3ecf25e06a48a797a9081b9114d, type: 3}
   m_PrefabInstance: {fileID: 1687522233}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1788993731
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1788993732}
+  m_Layer: 0
+  m_Name: SkipTurretPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 3306451490063965843, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1788993732
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788993731}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1087704068}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1824253116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2473,42 +2507,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: _ignoreTutorial
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: _delayBetweenWaves
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: _spawnOffsetDistance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: _waitBeforeFirstWave
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: _wavesData.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: _spawnPoints.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: '_wavesData.Array.data[0]'
-      value: 
-      objectReference: {fileID: 11400000, guid: c6bf1450263912940b1a0154488218a0, type: 2}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: '_wavesData.Array.data[1]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 1b945e5c28d176f4688534e898934b2f, type: 2}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
-      propertyPath: '_wavesData.Array.data[2]'
-      value: 
-      objectReference: {fileID: 11400000, guid: 7451d25bc6afd0443b0554adb1d62a01, type: 2}
-    - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: '_spawnPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 549800861}
@@ -2520,6 +2518,10 @@ PrefabInstance:
       propertyPath: '_spawnPoints.Array.data[2]'
       value: 
       objectReference: {fileID: 1080314447}
+    - target: {fileID: 3933938821042103830, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
+      propertyPath: puntoDiArrivo
+      value: 
+      objectReference: {fileID: 1788993732}
     - target: {fileID: 7496442073348581602, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: m_Name
       value: WaveManager

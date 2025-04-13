@@ -49,13 +49,21 @@ public class HealthManager : MonoBehaviour
         }
         else if (_tutorialTurret != null)
         {
-            _tutorialTurret.ActivateWavesManager();
+            if (_tutorialTurret._skipTurret == false)
+            {
+                _tutorialTurret.ActivateWavesManager();
+            }
+            else
+            {
+                _tutorialTurret.SkipWavesTimer();
+            }
         }
         else if (_playerHealthController != null)
         {
             _playerHealthController.GettingDamaged();
         }
     }
+
     public void TakeExplosion(int damage)
     {
         lives -= damage;

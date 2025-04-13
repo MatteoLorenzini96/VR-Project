@@ -17,6 +17,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private bool _waitBeforeFirstWave = false;
     [SerializeField] private float _delayBetweenWaves = 15f;
 
+    [Header("Skip Globe Settings")]
+    [SerializeField] private GameObject _skipGlobePrefab;
+
     [SerializeField] private List<Transform> _spawnPoints;
 
     [Header("Debug - Spawn Points per Nome (solo visuale)")]
@@ -32,6 +35,7 @@ public class WaveManager : MonoBehaviour
 
     private Transform _player;
     private Transform _enemiesParent;
+    private TargetSpawner _targetSpawner;
 
     private Dictionary<int, List<Transform>> _groupedSpawnPoints = new Dictionary<int, List<Transform>>();
     private Dictionary<string, List<Transform>> _namedGroupedSpawnPoints = new Dictionary<string, List<Transform>>();
@@ -40,6 +44,8 @@ public class WaveManager : MonoBehaviour
 
     void Start()
     {
+        _targetSpawner = GetComponent<TargetSpawner>();
+
         FindSpawnerPositions();
 
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -123,6 +129,9 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator StartWave()
     {
+        TutorialTurret _tutorialTurret = FindAnyObjectByType<TutorialTurret>();
+        _tutorialTurret.DeleteTurret();
+
         if (_currentWaveIndex >= _wavesData.Count)
         {
             Debug.Log("All waves completed! " + _elapsedTime + " seconds.");
@@ -188,6 +197,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator NextWave()
     {
+        SpawnSkipGlobe();   //Spawna il Target per lo skip 
         _waitingNextWaveCoroutine = StartCoroutine(DelayedNextWave());
         yield return _waitingNextWaveCoroutine;
     }
@@ -202,6 +212,7 @@ public class WaveManager : MonoBehaviour
 
     public void SkipDelayBetweenWaves()
     {
+        //Debug.Log("Funziono");
         if (_waitingNextWaveCoroutine != null)
         {
             StopCoroutine(_waitingNextWaveCoroutine);
@@ -210,5 +221,10 @@ public class WaveManager : MonoBehaviour
             StartCoroutine(StartWave());
             //Debug.Log("Wave skip requested. Skipping delay...");
         }
+    }
+
+    private void SpawnSkipGlobe()
+    {
+        _targetSpawner.SpawnOggetto();
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 612275140839629613}
   - component: {fileID: 1124672144858214770}
+  - component: {fileID: 3933938821042103830}
   m_Layer: 0
   m_Name: WaveManager
   m_TagString: Untagged
@@ -44,6 +45,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f9c3ea503423c419efdd55e4394972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnPoints: []
-  _wavesData: []
-  _delayBetweenWaves: 5
+  _ignoreTutorial: 0
+  _waitBeforeFirstWave: 1
+  _delayBetweenWaves: 15
+  _skipGlobePrefab: {fileID: 8462599963217888200, guid: 64f8443510bce054ca5a247d567fd09f, type: 3}
+  _spawnPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _namedSpawnGroups: []
+  _wavesData:
+  - {fileID: 11400000, guid: c6bf1450263912940b1a0154488218a0, type: 2}
+  - {fileID: 11400000, guid: 1b945e5c28d176f4688534e898934b2f, type: 2}
+  - {fileID: 11400000, guid: 7451d25bc6afd0443b0554adb1d62a01, type: 2}
+  _spawnOffsetDistance: 20
+--- !u!114 &3933938821042103830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7496442073348581602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e288145c901c32440ab6a6bcd2453a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  oggettoDaSpawnare: {fileID: 4539283161842297246, guid: fd3fedc53c375534f86056d1e2e4da38, type: 3}
+  puntoDiArrivo: {fileID: 0}
+  spawnOffsetDistance: 20
+  moveSpeed: 5
+  arcHeight: 3
