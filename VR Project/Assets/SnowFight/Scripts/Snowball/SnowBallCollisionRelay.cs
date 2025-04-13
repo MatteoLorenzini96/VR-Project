@@ -19,6 +19,8 @@ public class SnowballTriggerRelay : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         _mergeScript?.HandleTriggerWith(other.gameObject);
+        DoDeathVFXandSFX();
+        Destroy(gameObject);
         // Debug.Log("Trigger rilevato con " + other.gameObject.name);
     }
 
