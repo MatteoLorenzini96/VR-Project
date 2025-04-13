@@ -5,6 +5,14 @@ using UnityEditor;
 
 public class Debugger : MonoBehaviour
 {
+    private HealthManager _playerHealthManager;
+
+
+    private void Start()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        _playerHealthManager = player.GetComponent<HealthManager>();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -18,6 +26,14 @@ public class Debugger : MonoBehaviour
             // Se siamo in una build, chiudiamo l'applicazione
             Application.Quit();
 #endif
+        }
+        if (Input.GetKeyUp(KeyCode.N))
+        {
+            _playerHealthManager.TakeDamage();
+        }
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+            _playerHealthManager.HealthRecovery(1);
         }
     }
 }

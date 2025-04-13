@@ -37,6 +37,10 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _Texture2D:
         m_Texture: {fileID: 2800000, guid: 6820ad5f045773a45964e7496f9f8155, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -55,19 +59,28 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _ColorMask: 15
     - _Intensity: 2
     - _NoiseIntensity: 2
-    - _NoisePower: 12
+    - _NoisePower: 35
     - _Power: 5
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _VignetteIntensity: 0
-    - _VignettePower: 1.5
+    - _Stencil: 0
+    - _StencilComp: 8
+    - _StencilOp: 0
+    - _StencilReadMask: 255
+    - _StencilWriteMask: 255
+    - _UIMaskSoftnessX: 1
+    - _UIMaskSoftnessY: 1
+    - _VignetteIntensity: 0.75
+    - _VignettePower: 2.5
     - _VoronoiIntensity: 1
     - _VoronoiPower: 3.15
     - _VoronoiSpeed: 2
     m_Colors:
+    - _ClipRect: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0, b: 0, a: 1}
-    - _NoiseColor: {r: 0.22316661, g: 0.53630966, b: 0.8018868, a: 0}
+    - _NoiseColor: {r: 0.22352938, g: 0.6320088, b: 0.8, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
