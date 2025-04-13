@@ -41,7 +41,7 @@ public class MoveToPlayer : MonoBehaviour
         }
         else
         {
-            _healthManager = GetComponent<HealthManager>();
+            _healthManager = _player.GetComponent<HealthManager>();
         }
 
         _startPoint = transform.position;
