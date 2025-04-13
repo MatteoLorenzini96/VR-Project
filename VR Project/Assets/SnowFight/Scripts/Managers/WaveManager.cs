@@ -6,7 +6,7 @@ using System.Linq;
 [System.Serializable]
 public class NamedSpawnGroup
 {
-    public string parentName;               // il nome del padre
+    public string parentName;
     public List<Transform> spawnPoints = new List<Transform>();
 }
 
@@ -28,6 +28,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float _spawnOffsetDistance = 20f;
 
     private int _currentWaveIndex = 0;
+    private Coroutine _waitingNextWaveCoroutine;
+
     private Transform _player;
     private Transform _enemiesParent;
 
@@ -174,7 +176,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator CheckRemainingEnemies()
     {
-        yield return new WaitForSeconds(0.7f); 
+        yield return new WaitForSeconds(0.7f);
         int remainingEnemies = FindObjectsByType<EnemyIdentifier>(FindObjectsSortMode.None).Length;
         Debug.Log("Enemies remaining: " + remainingEnemies);
 
@@ -186,8 +188,27 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator NextWave()
     {
+        _waitingNextWaveCoroutine = StartCoroutine(DelayedNextWave());
+        yield return _waitingNextWaveCoroutine;
+    }
+
+    private IEnumerator DelayedNextWave()
+    {
         yield return new WaitForSeconds(_delayBetweenWaves);
         _currentWaveIndex++;
+        _waitingNextWaveCoroutine = null;
         StartCoroutine(StartWave());
+    }
+
+    public void SkipDelayBetweenWaves()
+    {
+        if (_waitingNextWaveCoroutine != null)
+        {
+            StopCoroutine(_waitingNextWaveCoroutine);
+            _waitingNextWaveCoroutine = null;
+            _currentWaveIndex++;
+            StartCoroutine(StartWave());
+            //Debug.Log("Wave skip requested. Skipping delay...");
+        }
     }
 }
