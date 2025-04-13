@@ -181,4 +181,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eca8057a1049c1942aec6115c8348d75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _bulletDestructionVFXName: BulletDestructionEffect
+  _bulletDestructionSFXName: BulletDestructionSound
   _lifeTime: 5
