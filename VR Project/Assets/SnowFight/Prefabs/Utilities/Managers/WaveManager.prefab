@@ -45,10 +45,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68f9c3ea503423c419efdd55e4394972, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ignoreTutorial: 0
-  _waitBeforeFirstWave: 1
+  _ignoreTutorial: 1
+  _waitBeforeFirstWave: 0
   _delayBetweenWaves: 15
-  _skipGlobePrefab: {fileID: 8462599963217888200, guid: 64f8443510bce054ca5a247d567fd09f, type: 3}
   _spawnPoints:
   - {fileID: 0}
   - {fileID: 0}

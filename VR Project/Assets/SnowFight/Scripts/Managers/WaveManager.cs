@@ -17,9 +17,6 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private bool _waitBeforeFirstWave = false;
     [SerializeField] private float _delayBetweenWaves = 15f;
 
-    [Header("Skip Globe Settings")]
-    [SerializeField] private GameObject _skipGlobePrefab;
-
     [SerializeField] private List<Transform> _spawnPoints;
 
     [Header("Debug - Spawn Points per Nome (solo visuale)")]
@@ -130,7 +127,10 @@ public class WaveManager : MonoBehaviour
     private IEnumerator StartWave()
     {
         TutorialTurret _tutorialTurret = FindAnyObjectByType<TutorialTurret>();
-        _tutorialTurret.DeleteTurret();
+        if (_tutorialTurret != null)
+        {
+            _tutorialTurret.DeleteTurret();
+        }
 
         if (_currentWaveIndex >= _wavesData.Count)
         {
@@ -197,7 +197,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator NextWave()
     {
-        SpawnSkipGlobe();   //Spawna il Target per lo skip 
+        SpawnSkipTurret();   //Spawna il Target per lo skip 
         _waitingNextWaveCoroutine = StartCoroutine(DelayedNextWave());
         yield return _waitingNextWaveCoroutine;
     }
@@ -223,7 +223,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    private void SpawnSkipGlobe()
+    private void SpawnSkipTurret()
     {
         _targetSpawner.SpawnOggetto();
     }
