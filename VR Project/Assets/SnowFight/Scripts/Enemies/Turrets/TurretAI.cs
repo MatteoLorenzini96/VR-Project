@@ -39,15 +39,21 @@ public class TurretAI : MonoBehaviour
     private Transform _playerTransform;
     private EnemyIdentifier _enemyIdentifier;
     private HealthManager _healthManager;
+    private Animations _animations;
 
     private void Start()
     {
         SearchHealthManager();
         SearchForIdentifier();
+        SearchForAnimations();
+        LookAtPlayer();
     }
 
     public void ActivateTurret()
     {
+        _animations.ResetMaterial();
+        _animations.TargetDown();
+
         VFXManager.Instance.SpawnEffect(_turretCreationVFXName, transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySFX(_turretCreationSFXName);
 
@@ -57,6 +63,13 @@ public class TurretAI : MonoBehaviour
         LookAtPlayer();
         StartCoroutine(UpdateTarget());
         StartCoroutine(ShootAtPlayer());
+    }
+
+    private void SearchForAnimations()
+    {
+        _animations = GetComponent<Animations>();
+
+        _animations.ChangeMaterial();
     }
 
     private void SearchHealthManager()
@@ -123,6 +136,8 @@ public class TurretAI : MonoBehaviour
 
     private IEnumerator ShootAtPlayer()
     {
+        yield return new WaitForSeconds(1f);
+
         while (true)
         {
             if (_playerTransform != null && _bulletPrefab != null && _firePoints.Count > 0)
@@ -163,6 +178,8 @@ public class TurretAI : MonoBehaviour
                 AudioManager.Instance.PlaySFX(_turretDestructionSFXName);
 
                 HandleDestruction();
+
+                _animations.TargetUp();
 
                 break;
             default:
