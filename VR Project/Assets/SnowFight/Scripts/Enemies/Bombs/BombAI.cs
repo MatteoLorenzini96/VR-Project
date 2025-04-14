@@ -33,6 +33,7 @@ public class BombAI : MonoBehaviour
         SearchForPlayer();
         SearchForIdentifier();
         PlayTickingSound();
+        LookAtPlayer();
     }
 
     private void FixedUpdate()
@@ -41,6 +42,16 @@ public class BombAI : MonoBehaviour
         {
             MoveTowardsPlayer();
             UpdateTickingSound();
+        }
+    }
+
+    private void LookAtPlayer()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("PlayerPoint");
+        if (playerObject)
+        {
+            _playerTransform = playerObject.transform;
+            transform.LookAt(_playerTransform);
         }
     }
 
