@@ -10,6 +10,7 @@ TagManager:
   - Bullet
   - PlayerPoint
   - Tutorial
+  - Target
   layers:
   - Default
   - TransparentFX

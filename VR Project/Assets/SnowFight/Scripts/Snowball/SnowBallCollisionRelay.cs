@@ -20,7 +20,11 @@ public class SnowballTriggerRelay : MonoBehaviour
     {
         _mergeScript?.HandleTriggerWith(other.gameObject);
         DoDeathVFXandSFX();
-        Destroy(gameObject);
+
+        if (other.gameObject.CompareTag("Target"))
+        {
+            Destroy(gameObject);
+        }
         // Debug.Log("Trigger rilevato con " + other.gameObject.name);
     }
 
