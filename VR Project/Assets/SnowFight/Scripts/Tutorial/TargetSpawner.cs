@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
 public class TargetSpawner : MonoBehaviour
 {
@@ -17,6 +17,9 @@ public class TargetSpawner : MonoBehaviour
     [SerializeField] private float arcHeight = 3f;
 
     private Transform _player;
+    private Animations _animations;
+
+    private bool _isSpawned = false;
 
     private void Start()
     {
@@ -33,20 +36,29 @@ public class TargetSpawner : MonoBehaviour
 
     public void SpawnOggetto()
     {
-        if (oggettoDaSpawnare == null || puntoDiArrivo == null || _player == null)
+        if (!_isSpawned)
         {
-            Debug.LogWarning("Oggetto, punto di arrivo o player non assegnato!");
-            return;
+            _isSpawned = true;
+
+            if (oggettoDaSpawnare == null || puntoDiArrivo == null || _player == null)
+            {
+                Debug.LogWarning("Oggetto, punto di arrivo o player non assegnato!");
+                return;
+            }
+
+            // Calcola posizione di spawn offsettata
+            Vector3 direction = (puntoDiArrivo.position - _player.position).normalized;
+            Vector3 spawnPosition = puntoDiArrivo.position + direction * spawnOffsetDistance;
+
+            GameObject nuovoOggetto = Instantiate(oggettoDaSpawnare, spawnPosition, Quaternion.identity);
+
+            _animations = nuovoOggetto.GetComponent<Animations>();
+
+            // Avvia la coroutine per il movimento parabolico
+            StartCoroutine(MuoviParabolicamente(nuovoOggetto.transform, spawnPosition, puntoDiArrivo.position));
         }
 
-        // Calcola posizione di spawn offsettata
-        Vector3 direction = (puntoDiArrivo.position - _player.position).normalized;
-        Vector3 spawnPosition = puntoDiArrivo.position + direction * spawnOffsetDistance;
-
-        GameObject nuovoOggetto = Instantiate(oggettoDaSpawnare, spawnPosition, Quaternion.identity);
-
-        // Avvia la coroutine per il movimento parabolico
-        StartCoroutine(MuoviParabolicamente(nuovoOggetto.transform, spawnPosition, puntoDiArrivo.position));
+        return;
     }
 
     private IEnumerator MuoviParabolicamente(Transform oggetto, Vector3 inizio, Vector3 destinazione)
@@ -70,6 +82,7 @@ public class TargetSpawner : MonoBehaviour
             {
                 oggetto.position = destinazione;
                 movimentoAttivo = false;
+                _animations.BegingTargetDown();
             }
 
             yield return null;

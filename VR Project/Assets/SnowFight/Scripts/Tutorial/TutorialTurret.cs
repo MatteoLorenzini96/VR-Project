@@ -1,8 +1,11 @@
 using UnityEngine;
+using System.Collections;
 
 public class TutorialTurret : MonoBehaviour
 {
     private WaveManager _waveManager;
+    private Animations _animations;
+
     GameObject _setTutorial;
 
     [SerializeField] public bool _skipTurret = false;
@@ -11,6 +14,7 @@ public class TutorialTurret : MonoBehaviour
 
     private void Start()
     {
+        _animations = GetComponent<Animations>();
         _waveManager = FindAnyObjectByType<WaveManager>();
         _setTutorial = GameObject.FindGameObjectWithTag("Tutorial");
         if (_setTutorial == null)
@@ -23,10 +27,12 @@ public class TutorialTurret : MonoBehaviour
     {
         if (!_isDead)
         {
+            _animations.BegingTargetUp();
+
             _waveManager.ActivateWaves();
             _isDead = true;
             Destroy(_setTutorial);
-            Destroy(gameObject);
+            StartCoroutine(DestroyAfterDelay(1.5f));
         }
         return;
     }
@@ -35,9 +41,11 @@ public class TutorialTurret : MonoBehaviour
     {
         if (!_isDead)
         {
+            _animations.BegingTargetUp();
+
             _waveManager.SkipDelayBetweenWaves();
             _isDead = true;
-            Destroy(gameObject);
+            StartCoroutine(DestroyAfterDelay(1.5f));
         }
         return;
     }
@@ -46,9 +54,18 @@ public class TutorialTurret : MonoBehaviour
     {
         if (!_isDead)
         {
+            _animations.BegingTargetUp();
+
             _isDead = true;
-            Destroy(gameObject);
+            StartCoroutine(DestroyAfterDelay(1.5f));
         }
         return;
     }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
+    }
+
 }

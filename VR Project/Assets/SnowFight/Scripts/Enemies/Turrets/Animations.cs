@@ -80,9 +80,9 @@ public class Animations : MonoBehaviour
             _targetCollider.enabled = true;
         }
 
-        Debug.Log("Attesa TatgetDown iniziata");
+        //Debug.Log("Attesa TatgetDown iniziata");
         yield return new WaitForSeconds(.5f);
-        Debug.Log("Attesa TatgetDown finita");
+        //Debug.Log("Attesa TatgetDown finita");
 
         _targetDownCoroutine = null;
     }
@@ -109,9 +109,9 @@ public class Animations : MonoBehaviour
             _targetCollider.enabled = false;
         }
 
-        Debug.Log("Attesa TatgetUp iniziata");
+        //Debug.Log("Attesa TatgetUp iniziata");
         yield return new WaitForSeconds(2f);
-        Debug.Log("Attesa TatgetUp finita");
+        //Debug.Log("Attesa TatgetUp finita");
 
         _targetUpCoroutine = null;
     }
