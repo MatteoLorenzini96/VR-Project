@@ -129,8 +129,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 8
-  m_fontSizeBase: 8
+  m_fontSize: 5
+  m_fontSizeBase: 5
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -232,6 +232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Skip_Turret
       objectReference: {fileID: 0}
+    - target: {fileID: 6534326725140046719, guid: 248535de095b09e43a345bfd6c5fdfcf, type: 3}
+      propertyPath: _targetObject
+      value: 
+      objectReference: {fileID: 3440150358627084037}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -240,6 +244,11 @@ PrefabInstance:
       addedObject: {fileID: 2101270232013680638}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 248535de095b09e43a345bfd6c5fdfcf, type: 3}
+--- !u!1 &3440150358627084037 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5136920772724956401, guid: 248535de095b09e43a345bfd6c5fdfcf, type: 3}
+  m_PrefabInstance: {fileID: 7563756814949350388}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5514414518776473236 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2625878367354969440, guid: 248535de095b09e43a345bfd6c5fdfcf, type: 3}
