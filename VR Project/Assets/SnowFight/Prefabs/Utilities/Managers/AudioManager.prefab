@@ -309,23 +309,27 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: f342ea7addd30c749a95165a55f7e45e, type: 3}
   sfxSounds:
   - name: SnowBallImpactSound
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: c3159798349d0d149b9c78222591d6d8, type: 3}
   - name: SnowBlockCreationSound
     clip: {fileID: 0}
   - name: SnowBlockDamagedSound
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: 8976766fbe066e94c82469975245dd6e, type: 3}
   - name: SnowBlockDestructionSound
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: c2301eb1a495e504fb31f66e61d30536, type: 3}
+  - name: SnowBlockPositioningSound
+    clip: {fileID: 8300000, guid: 0db9f21140d234a47a0df81be8f42e95, type: 3}
+  - name: SnowBlockTakingSound
+    clip: {fileID: 8300000, guid: c6ac2ddec7e5bc342ac2c7e98d9208c8, type: 3}
   - name: TurretShootSound
     clip: {fileID: 0}
   - name: TurretCreationSound
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: bfa61b3a1395ae2449d44b7bddf731a9, type: 3}
   - name: TurretDestructionSound
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: fe072261e3ba3b640898215288cfcf50, type: 3}
   - name: BulletDestructionSound
     clip: {fileID: 0}
   - name: BombTickingSound
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: c9946acba004bd84ba794edd18782389, type: 3}
   - name: BombExplosionSound
     clip: {fileID: 0}
   musicSource: {fileID: 3820733313558937909}
