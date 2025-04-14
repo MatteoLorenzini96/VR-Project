@@ -6,7 +6,7 @@ public class HpText : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _hpText;
     [SerializeField] private HealthManager _healthManager;
     [SerializeField] private GameObject _panel;
-    [SerializeField] private float stillThreshold = 0.001f; // Sensibilità movimento
+    [SerializeField] private float stillThreshold = 0.01f; // Sensibilità movimento
     [SerializeField] private float stillTimeRequired = 0.5f; // Tempo necessario da fermo
 
     private Vector3 _lastPosition;

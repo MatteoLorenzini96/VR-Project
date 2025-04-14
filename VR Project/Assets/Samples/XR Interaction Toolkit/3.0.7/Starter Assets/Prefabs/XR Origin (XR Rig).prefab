@@ -1098,6 +1098,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vignetteRenderer: {fileID: 6586274541032398210}
   _flashScreenTime: 0.3
+  _hpText: {fileID: 5164614422745324522}
 --- !u!114 &6727931442159451804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2279,8 +2280,8 @@ MonoBehaviour:
   _hpText: {fileID: 8151294015252381521}
   _healthManager: {fileID: 6727931442159451804}
   _panel: {fileID: 1010807406051458967}
-  stillThreshold: 0.001
-  stillTimeRequired: 1
+  stillThreshold: 0.01
+  stillTimeRequired: 0.5
 --- !u!1001 &494449108016059778
 PrefabInstance:
   m_ObjectHideFlags: 0

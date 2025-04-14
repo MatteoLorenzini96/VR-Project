@@ -87,6 +87,8 @@ public class HealthManager : MonoBehaviour
     {
         int oldLives = lives;
         lives = Mathf.Min(lives + amount, maxLives);
+
+        _playerHealthController.UpdateHpText();
         _playerHealthController.UpdateVignette();
         _playerHealthController.FlashScreen(Color.green);
         //Debug.Log($"{gameObject.name} ha recuperato {lives - oldLives} vite. Vite attuali: {lives}");
