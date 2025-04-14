@@ -82,7 +82,7 @@ public class EnemyIdentifier : MonoBehaviour
     public void DestroyEnemy()
     {
         _waveManager?.EnemyDied();
-        Debug.Log("Notifico la morte al WaveManager");
+        //Debug.Log("Notifico la morte al WaveManager");
         StartCoroutine(DestroyAfterDelay(.5f));
     }
 

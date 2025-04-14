@@ -32,7 +32,7 @@ public class HealthManager : MonoBehaviour
     {
         lives--;
 
-        Debug.Log($"{gameObject.name} ha subito un colpo. Vite rimaste: {lives}");
+        //Debug.Log($"{gameObject.name} ha subito un colpo. Vite rimaste: {lives}");
 
         if (_snowBlockHealth != null)
         {
@@ -89,6 +89,6 @@ public class HealthManager : MonoBehaviour
         lives = Mathf.Min(lives + amount, _maxLives);
         _playerHealthController.UpdateVignette();
         _playerHealthController.FlashScreen(Color.green);
-        Debug.Log($"{gameObject.name} ha recuperato {lives - oldLives} vite. Vite attuali: {lives}");
+        //Debug.Log($"{gameObject.name} ha recuperato {lives - oldLives} vite. Vite attuali: {lives}");
     }
 }

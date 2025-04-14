@@ -90,7 +90,7 @@ public class MoveToPlayer : MonoBehaviour
     private void PlayerReached()
     {
         _healthManager.HealthRecovery(1);
-        Debug.Log("Target raggiunto, aggiungo 1 vita e mi distruggo oggetto.");
+        //Debug.Log("Target raggiunto, aggiungo 1 vita e mi distruggo oggetto.");
         Destroy(gameObject);
     }
 
