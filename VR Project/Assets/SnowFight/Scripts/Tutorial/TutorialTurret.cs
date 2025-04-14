@@ -3,6 +3,10 @@ using System.Collections;
 
 public class TutorialTurret : MonoBehaviour
 {
+    [Header("Distruzione VFX and SFX")]
+    [SerializeField] private string _turretDestructionVFXName = "SnowBlockCreationEffect";
+    [SerializeField] private string _turretDestructionSFXName = "TurretDestructionSound";
+
     private WaveManager _waveManager;
     private Animations _animations;
 
@@ -65,6 +69,8 @@ public class TutorialTurret : MonoBehaviour
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
+        VFXManager.Instance.SpawnEffect(_turretDestructionVFXName, transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySFX(_turretDestructionSFXName);
         Destroy(gameObject);
     }
 

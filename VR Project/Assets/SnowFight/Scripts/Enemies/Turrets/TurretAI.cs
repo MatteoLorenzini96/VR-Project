@@ -33,7 +33,7 @@ public class TurretAI : MonoBehaviour
     [SerializeField] private string _turretDestructionVFXName = "TurretDestructionEffect";
     [SerializeField] private string _turretDownVFXName = "TurretDownEffect";
     [SerializeField] private string _turretDestructionSFXName = "TurretDestructionSound";
-    [Header("Distruzione VFX and SFX")]
+    [Header("Collider da attivare quando si Distrugge")]
     [SerializeField] private Collider _destructionCollider;
 
 
