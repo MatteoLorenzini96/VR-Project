@@ -13,6 +13,7 @@ public class PlayerHealthController : MonoBehaviour
     private int _maxLives = 0;
     private float _maxVignetteIntensity = 2f;
     private HealthManager _healthManager;
+    [SerializeField] private HpText _hpText;
     private Color _originalNoiseColor;
 
     private void Start()
@@ -54,7 +55,13 @@ public class PlayerHealthController : MonoBehaviour
     public void GettingDamaged()
     {
         UpdateVignette();
+        UpdateHpText();
         FlashScreen(Color.red);
+    }
+
+    public void UpdateHpText()
+    {
+        _hpText.UpdateHpText();
     }
 
     public void UpdateVignette()

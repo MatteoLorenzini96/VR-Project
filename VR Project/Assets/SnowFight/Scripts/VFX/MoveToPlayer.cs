@@ -5,6 +5,7 @@ public class MoveToPlayer : MonoBehaviour
 {
     [Header("Target")]
     [SerializeField] private string _targetTag = "PlayerPoint";
+    [SerializeField] private int _healthToRegen = 1;
 
     [Header("Movement Settings")]
     [SerializeField] private float _duration = 2f;
@@ -89,7 +90,7 @@ public class MoveToPlayer : MonoBehaviour
 
     private void PlayerReached()
     {
-        _healthManager.HealthRecovery(1);
+        _healthManager.HealthRecovery(_healthToRegen);
         //Debug.Log("Target raggiunto, aggiungo 1 vita e mi distruggo oggetto.");
         Destroy(gameObject);
     }
