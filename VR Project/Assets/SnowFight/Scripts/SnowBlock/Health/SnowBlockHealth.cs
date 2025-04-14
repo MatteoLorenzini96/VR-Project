@@ -14,36 +14,60 @@ public class SnowBlockHealth : MonoBehaviour
     [SerializeField] private string _snowBlockDestructionSFXName = "SnowBlockDestructionSound";
 
     private HealthManager _healthManager;
-    
+
+    [Header("Renderer dell'oggetto con il materiale overlay")]
+    [SerializeField] private Renderer _overlayRenderer;
+    [Header("Indice del materiale da modificare")]
+    [SerializeField] private int _materialIndexToModify = 1;
+
+    private Material _overlayMaterial;
+
     private void Start()
     {
         _healthManager = GetComponent<HealthManager>();
 
         VFXManager.Instance.SpawnEffect(_snowBlockCreationVFXName, transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySFX(_snowBlockCreationSFXName);
+
+        if (_overlayRenderer == null)
+        {
+            Debug.LogError("Renderer non assegnato per il materiale Overlay.");
+            return;
+        }
+
+        Material[] materials = _overlayRenderer.materials;
+
+        if (_materialIndexToModify < 0 || _materialIndexToModify >= materials.Length)
+        {
+            Debug.LogError("Indice del materiale fuori range.");
+            return;
+        }
+
+        _overlayMaterial = materials[_materialIndexToModify];
     }
+
 
     public void GettingDamaged()
     {
         switch (_healthManager.lives)
         {
             case 3:
-                Debug.Log("Vita 3: Niente accade");
-                // Puoi aggiungere il codice che desideri qui
+                //Debug.Log("Vita 3: Niente accade");
+                _overlayMaterial.SetFloat("_Damage", 0f);
+
                 break;
             case 2:
-                Debug.Log("Vita 2: Riduci la visibilità");
-
+                //Debug.Log("Vita 2: Riduci la visibilità");
                 AudioManager.Instance.PlaySFX(_snowBlockDamagedSFXName);
-                // Puoi aggiungere il codice che desideri qui
+                _overlayMaterial.SetFloat("_Damage", 0.5f);
+
                 break;
             case 1:
-                Debug.Log("Vita 1: Block si avvicina al danno massimo");
-
+                //Debug.Log("Vita 1: Block si avvicina al danno massimo");
                 AudioManager.Instance.PlaySFX(_snowBlockDamagedSFXName);
-                // Puoi aggiungere il codice che desideri qui
-                break;
+                _overlayMaterial.SetFloat("_Damage", 1f);
 
+                break;
             case 0:
                 Debug.Log("Vita 0: Il blocco è distrutto!");
 
