@@ -72,7 +72,7 @@ public class EnemyIdentifier : MonoBehaviour
         {
             return;
         }
-        if (_turretAI != null) 
+        if (_turretAI != null)
         {
             _turretAI.ActivateTurret();
         }
@@ -81,14 +81,14 @@ public class EnemyIdentifier : MonoBehaviour
 
     public void DestroyEnemy()
     {
-        _waveManager?.EnemyDied();
-        //Debug.Log("Notifico la morte al WaveManager");
-        StartCoroutine(DestroyAfterDelay(.5f));
+        StartCoroutine(DestroyAfterDelay(5f));
     }
 
     private IEnumerator DestroyAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
+        //Debug.Log("Notifico la morte al WaveManager");
+        _waveManager?.EnemyDied();
         Destroy(gameObject);
     }
 }

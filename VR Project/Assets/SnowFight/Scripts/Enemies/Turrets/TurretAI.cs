@@ -32,6 +32,9 @@ public class TurretAI : MonoBehaviour
     [Header("Distruzione VFX and SFX")]
     [SerializeField] private string _turretDestructionVFXName = "TurretDestructionEffect";
     [SerializeField] private string _turretDestructionSFXName = "TurretDestructionSound";
+    [Header("Distruzione VFX and SFX")]
+    [SerializeField] private Collider _destructionCollider;
+
 
     private Vector3 _startPosition;
     private Vector3 _targetPosition;
@@ -40,9 +43,11 @@ public class TurretAI : MonoBehaviour
     private EnemyIdentifier _enemyIdentifier;
     private HealthManager _healthManager;
     private Animations _animations;
+    private Rigidbody _rb;
 
     private void Start()
     {
+        _rb = GetComponent<Rigidbody>();
         SearchHealthManager();
         SearchForIdentifier();
         SearchForAnimations();
@@ -52,7 +57,7 @@ public class TurretAI : MonoBehaviour
     public void ActivateTurret()
     {
         _animations.ResetMaterial();
-        _animations.TargetDown();
+        _animations.BegingTargetDown();
 
         VFXManager.Instance.SpawnEffect(_turretCreationVFXName, transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySFX(_turretCreationSFXName);
@@ -177,15 +182,28 @@ public class TurretAI : MonoBehaviour
                 VFXManager.Instance.SpawnEffect(_turretDestructionVFXName, transform.position, Quaternion.identity);
                 AudioManager.Instance.PlaySFX(_turretDestructionSFXName);
 
-                HandleDestruction();
+                _animations.BegingTargetUp();
+                StopCoroutine(ShootAtPlayer());
 
-                _animations.TargetUp();
+                StartCoroutine(DoRagdoll());
+
+                HandleDestruction();
 
                 break;
             default:
                 Debug.Log("Valore di lives non valido.");
                 break;
         }
+    }
+
+    private IEnumerator DoRagdoll()
+    {
+        _rb.useGravity = true;
+        _destructionCollider.enabled = true;
+
+        yield return new WaitForSeconds(2f);
+
+        //Debug.Log("Fine della fase di ragdoll");
     }
 
     public void HandleDestruction()

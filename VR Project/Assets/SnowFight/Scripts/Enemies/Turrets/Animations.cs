@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class Animations : MonoBehaviour
 {
@@ -13,10 +14,17 @@ public class Animations : MonoBehaviour
 
     private List<Renderer> _renderers = new List<Renderer>();
     private List<Material> _originalMaterials = new List<Material>();
+
+    private Transform _playerTransform;
+
     private Coroutine _rotationCoroutine;
+    private Coroutine _targetUpCoroutine;
+    private Coroutine _targetDownCoroutine;
 
     private void Awake()
     {
+        LookAtPlayer();
+
         if (_targetObject != null)
         {
             _renderers.AddRange(_targetObject.GetComponentsInChildren<Renderer>());
@@ -25,6 +33,16 @@ public class Animations : MonoBehaviour
             {
                 _originalMaterials.Add(renderer.material);
             }
+        }
+    }
+
+    private void LookAtPlayer()
+    {
+        GameObject playerObject = GameObject.FindGameObjectWithTag("PlayerPoint");
+        if (playerObject)
+        {
+            _playerTransform = playerObject.transform;
+            transform.LookAt(_playerTransform);
         }
     }
 
@@ -49,40 +67,89 @@ public class Animations : MonoBehaviour
         }
     }
 
-    public void TargetDown()
+    private IEnumerator TargetDown()
     {
-        if (_rotationCoroutine != null) StopCoroutine(_rotationCoroutine);
-        _rotationCoroutine = StartCoroutine(RotateToXAngle(180f));
+        if (_rotationCoroutine != null)
+            yield break; // o StopCoroutine(_rotationCoroutine); se vuoi forzare
+
+        _rotationCoroutine = StartCoroutine(RotateToXAngle(0f, 45f));
+        yield return _rotationCoroutine;
+
         if (_targetCollider != null)
         {
             _targetCollider.enabled = true;
         }
+
+        Debug.Log("Attesa TatgetDown iniziata");
+        yield return new WaitForSeconds(.5f);
+        Debug.Log("Attesa TatgetDown finita");
+
+        _targetDownCoroutine = null;
     }
 
-    public void TargetUp()
+    public void BegingTargetDown()
     {
-        if (_rotationCoroutine != null) StopCoroutine(_rotationCoroutine);
-        _rotationCoroutine = StartCoroutine(RotateToXAngle(90f));
+        if (_targetDownCoroutine != null)
+        {
+            return;
+        }
+        _targetDownCoroutine = StartCoroutine(TargetDown());
     }
 
-    private IEnumerator<WaitForEndOfFrame> RotateToXAngle(float targetX)
+    private IEnumerator TargetUp()
+    {
+        if (_rotationCoroutine != null)
+            yield break;
+
+        _rotationCoroutine = StartCoroutine(RotateToXAngle(90f, 45f));
+        yield return _rotationCoroutine;
+
+        if (_targetCollider != null)
+        {
+            _targetCollider.enabled = false;
+        }
+
+        Debug.Log("Attesa TatgetUp iniziata");
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Attesa TatgetUp finita");
+
+        _targetUpCoroutine = null;
+    }
+
+    public void BegingTargetUp()
+    {
+        if (_targetUpCoroutine != null)
+        {
+            return;
+        }
+        _targetUpCoroutine = StartCoroutine(TargetUp());
+    }
+
+    private IEnumerator RotateToXAngle(float targetX, float degreesPerSecond = 90f)
     {
         if (_targetTransform == null) yield break;
 
-        Quaternion startRotation = _targetTransform.rotation;
-        Vector3 currentEuler = _targetTransform.eulerAngles;
-        Quaternion endRotation = Quaternion.Euler(targetX, currentEuler.y, currentEuler.z);
+        // Prendiamo solo la componente X, ma manteniamo Y e Z attuali
+        float currentX = _targetTransform.localEulerAngles.x;
+        float targetAngle = Mathf.DeltaAngle(currentX, targetX); // Delta tra -180 e 180
+        float direction = Mathf.Sign(targetAngle); // -1 o 1
+        float angleRemaining = Mathf.Abs(targetAngle);
 
-        float duration = 1f;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
+        while (angleRemaining > 0.1f)
         {
-            _targetTransform.rotation = Quaternion.Slerp(startRotation, endRotation, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            float deltaAngle = degreesPerSecond * Time.deltaTime;
+            float rotationStep = Mathf.Min(deltaAngle, angleRemaining); // evita overshoot
+
+            currentX += rotationStep * direction;
+            _targetTransform.localEulerAngles = new Vector3(currentX, _targetTransform.localEulerAngles.y, _targetTransform.localEulerAngles.z);
+
+            angleRemaining -= rotationStep;
+            yield return null;
         }
 
-        _targetTransform.rotation = endRotation;
+        // Imposta con precisione l’angolo finale
+        _targetTransform.localEulerAngles = new Vector3(targetX, _targetTransform.localEulerAngles.y, _targetTransform.localEulerAngles.z);
+
+        _rotationCoroutine = null;
     }
 }
