@@ -933,7 +933,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1588224133399327408, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6150896554263436067, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2578,11 +2578,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: _ignoreTutorial
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: _waitBeforeFirstWave
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1124672144858214770, guid: 9108cd04ae9cced4190cfebd3cddca5e, type: 3}
       propertyPath: '_spawnPoints.Array.data[0]'
@@ -2617,6 +2617,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 200254838079875980, guid: f852f82838293444fb060a5869a54219, type: 3}
+      propertyPath: effectsList.Array.data[8].effectName
+      value: TurretDownEffect
+      objectReference: {fileID: 0}
     - target: {fileID: 4512611021044154683, guid: f852f82838293444fb060a5869a54219, type: 3}
       propertyPath: m_Name
       value: VFXManager

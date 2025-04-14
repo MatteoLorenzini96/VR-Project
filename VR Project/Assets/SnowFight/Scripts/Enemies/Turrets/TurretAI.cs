@@ -31,6 +31,7 @@ public class TurretAI : MonoBehaviour
 
     [Header("Distruzione VFX and SFX")]
     [SerializeField] private string _turretDestructionVFXName = "TurretDestructionEffect";
+    [SerializeField] private string _turretDownVFXName = "TurretDownEffect";
     [SerializeField] private string _turretDestructionSFXName = "TurretDestructionSound";
     [Header("Distruzione VFX and SFX")]
     [SerializeField] private Collider _destructionCollider;
@@ -180,6 +181,12 @@ public class TurretAI : MonoBehaviour
                 //Debug.Log("Vita 0: Il blocco è distrutto!");
 
                 VFXManager.Instance.SpawnEffect(_turretDestructionVFXName, transform.position, Quaternion.identity);
+                GameObject spawnedVFX = VFXManager.Instance.SpawnEffect(_turretDownVFXName, transform.position, Quaternion.identity);
+                if (spawnedVFX != null)
+                {
+                    spawnedVFX.transform.SetParent(transform);
+                }
+
                 AudioManager.Instance.PlaySFX(_turretDestructionSFXName);
 
                 _animations.BegingTargetUp();

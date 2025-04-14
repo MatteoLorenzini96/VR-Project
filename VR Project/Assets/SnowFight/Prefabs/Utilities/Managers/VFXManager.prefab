@@ -61,6 +61,8 @@ MonoBehaviour:
     effectPrefab: {fileID: 0}
   - effectName: TurretDestructionEffect
     effectPrefab: {fileID: 2235298226428947281, guid: 55ffd2b668526df4f914ff47e340c590, type: 3}
+  - effectName: TurretDown
+    effectPrefab: {fileID: 835818622194958099, guid: 55bf341fed91502488ee483dc2e692ed, type: 3}
   - effectName: BulletDestructionEffect
     effectPrefab: {fileID: 0}
   - effectName: BombExplosionEffect
