@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BombAI : MonoBehaviour
@@ -25,15 +26,47 @@ public class BombAI : MonoBehaviour
     private EnemyIdentifier _enemyIdentifier;
     private bool _isExploding = false;
     private SphereCollider _explosionCollider;
+    private EmissiveBlinkDynamic _emissiveControl;
 
     private AudioSource _tickingAudioSource;
 
+    // Aggiunto per gestire la Point Light
+    [SerializeField] private Light _pointLight;
+    [SerializeField] private float _maxLightIntensity = 5f;  // Intensità massima della luce
+    [SerializeField] private float _minLightIntensity = 0.2f;   // Intensità minima della luce
+    [SerializeField] private float _lightSpeed = 3f;          // Velocità di blinking della luce
+
     private void Start()
     {
+        SearchForEmissive();
         SearchForPlayer();
         SearchForIdentifier();
         PlayTickingSound();
         LookAtPlayer();
+        SearchPointLight();
+    }
+
+    private void SearchPointLight()
+    {
+        // Trova la Point Light nel GameObject (può essere aggiunta come componente)
+        _pointLight = GetComponentInChildren<Light>();
+        if (_pointLight == null)
+        {
+            Debug.LogWarning("Point Light non trovata su " + gameObject.name + "!");
+        }
+    }
+
+    private void SearchForEmissive()
+    {
+        _emissiveControl = GetComponentInChildren<EmissiveBlinkDynamic>();
+        if (_emissiveControl == null)
+        {
+            Debug.LogError("DynamicEmissiveControl non trovato su " + gameObject.name + "!");
+        }
+        else
+        {
+            //Debug.Log("DynamicEmissiveControl trovato e inizializzato.");
+        }
     }
 
     private void FixedUpdate()
@@ -42,6 +75,15 @@ public class BombAI : MonoBehaviour
         {
             MoveTowardsPlayer();
             UpdateTickingSound();
+        }
+        if (_emissiveControl != null)
+        {
+            _emissiveControl.UpdateEmissiveEffect();
+        }
+        // Gestiamo la luce che lampeggia man mano che la bomba si avvicina al giocatore
+        if (_pointLight != null && _playerTransform != null)
+        {
+            UpdateLightEffect();
         }
     }
 
@@ -80,27 +122,40 @@ public class BombAI : MonoBehaviour
 
     private void PlayTickingSound()
     {
-        // Usa AudioManager per iniziare a riprodurre il suono di ticking
-        AudioManager.Instance.PlaySFX(_bombTickingSFXName);
+        // Trova la clip dal AudioManager
+        Sound tickingSound = Array.Find(AudioManager.Instance.sfxSounds, s => s.name == _bombTickingSFXName);
 
-        // Trova l'AudioSource attualmente in uso dal AudioManager
-        _tickingAudioSource = AudioManager.Instance.sfxSource; // Assumendo che sfxSource stia riproducendo il suono
-        if (_tickingAudioSource == null)
+        if (tickingSound == null || tickingSound.clip == null)
         {
-            Debug.LogWarning("Nessun AudioSource trovato per il ticking sound!");
+            Debug.LogWarning("Clip per il ticking non trovata!");
+            return;
         }
+
+        // Crea un nuovo AudioSource solo per questo suono
+        _tickingAudioSource = gameObject.AddComponent<AudioSource>();
+        _tickingAudioSource.clip = tickingSound.clip;
+        _tickingAudioSource.loop = true;
+        _tickingAudioSource.playOnAwake = false;
+        _tickingAudioSource.volume = AudioManager.Instance.sfxSource.volume;
+        _tickingAudioSource.pitch = 1f; // Inizialmente normale
+        _tickingAudioSource.Play();
     }
 
     private void UpdateTickingSound()
     {
         if (_tickingAudioSource != null && _playerTransform != null)
         {
-            // Calcola la distanza tra la bomba e il giocatore
-            float distanceToPlayer = Vector3.Distance(transform.position, _playerTransform.position);
+            float maxDistance = 10f;
+            float distance = Vector3.Distance(transform.position, _playerTransform.position);
+            float t = Mathf.Clamp01(1f - (distance / maxDistance));
 
-            // Aggiorna pitch e velocità in base alla distanza (più vicino = più veloce)
-            float pitchMultiplier = Mathf.Clamp(1f / distanceToPlayer, 1f, 3f); // Configura i valori limite come preferito
-            _tickingAudioSource.pitch = pitchMultiplier; // Modifica la velocità di riproduzione
+            float newPitch = Mathf.Lerp(1f, 3f, t); // più vicino = pitch più alto
+            float newVolume = Mathf.Lerp(0.3f, 2f, t); // più vicino = volume più alto
+
+            _tickingAudioSource.pitch = newPitch;
+            _tickingAudioSource.volume = newVolume;
+
+            //Debug.Log($"Distanza: {distance:F2}, Pitch: {newPitch:F2}, Volume: {newVolume:F2}");
         }
     }
 
@@ -172,6 +227,18 @@ public class BombAI : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void UpdateLightEffect()
+    {
+        // Calcoliamo la distanza tra la bomba e il giocatore
+        float distance = Vector3.Distance(transform.position, _playerTransform.position);
+
+        // Modifica la velocità di blinking della luce in base alla distanza
+        float blinkSpeed = Mathf.Clamp01(distance / _explosionRadius);
+        float lightIntensity = Mathf.PingPong(Time.time * _lightSpeed * blinkSpeed, _maxLightIntensity - _minLightIntensity) + _minLightIntensity;
+
+        _pointLight.intensity = lightIntensity;
     }
 
     private void OnDrawGizmos()
