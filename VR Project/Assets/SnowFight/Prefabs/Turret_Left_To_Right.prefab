@@ -81,21 +81,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _canMove: 1
   _movementOffset: {x: 2, y: 0, z: 0}
-  _movementSpeed: 2
+  _movementSpeed: 1
   _bulletPrefab: {fileID: 7625530528999129246, guid: 7b3950af6b4503f4eb06a3b8513b63aa, type: 3}
   _firePoints:
   - {fileID: 5313040218678135336}
-  _bulletSpeed: 15
-  _normalCooldown: 3
+  _bulletSpeed: 5
+  _normalCooldown: 5
   _targetUpdateInterval: 1
   _turretShootVFXName: TurretShootEffect
   _turretShootSFXName: TurretShootSound
-  _randomCooldown: 0
-  _shootCooldownMin: 2
-  _shootCooldownMax: 5
+  _randomCooldown: 1
+  _shootCooldownMin: 5
+  _shootCooldownMax: 6
   _turretCreationVFXName: TurretCreationEffect
   _turretCreationSFXName: TurretCreationSound
   _turretDestructionVFXName: TurretDestructionEffect
+  _turretDownVFXName: TurretDownEffect
   _turretDestructionSFXName: TurretDestructionSound
   _destructionCollider: {fileID: 1745081150744620198}
 --- !u!114 &7520905444568049838
@@ -125,6 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 1
+  maxLives: 0
 --- !u!114 &882442903629483648
 MonoBehaviour:
   m_ObjectHideFlags: 0
