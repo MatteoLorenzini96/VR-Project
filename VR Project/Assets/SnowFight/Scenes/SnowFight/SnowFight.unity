@@ -15739,6 +15739,34 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3537730460680259266, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537730460680259266, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537730460680259266, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 412428216}
+    - target: {fileID: 3537730460680259266, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537730460680259266, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: DestroyHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537730460680259266, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: TargetSpawner, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537730460680259266, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+      propertyPath: m_SelectEntered.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 6150896554263436067, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15784,6 +15812,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+--- !u!114 &412428216 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1287006951401419665, guid: b708d91fbacd53c44b5f1e5988ec9f7c, type: 3}
+  m_PrefabInstance: {fileID: 412428215}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e288145c901c32440ab6a6bcd2453a18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &412597081
 GameObject:
   m_ObjectHideFlags: 0
@@ -34715,7 +34754,7 @@ PrefabInstance:
     - target: {fileID: 8397942712018715833, guid: 8d13d6992693b0046b8d173352c25ddc, type: 3}
       propertyPath: sfxSounds.Array.data[9].clip
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 8300000, guid: fbd7627680be1364ab9bd38588ce8d96, type: 3}
     - target: {fileID: 8397942712018715833, guid: 8d13d6992693b0046b8d173352c25ddc, type: 3}
       propertyPath: sfxSounds.Array.data[9].name
       value: BulletDestructionSound
@@ -34732,6 +34771,10 @@ PrefabInstance:
       propertyPath: sfxSounds.Array.data[11].name
       value: BombExplosionSound
       objectReference: {fileID: 0}
+    - target: {fileID: 8397942712018715833, guid: 8d13d6992693b0046b8d173352c25ddc, type: 3}
+      propertyPath: musicSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8439db91e2412fd4e83e675cc04dbc7e, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

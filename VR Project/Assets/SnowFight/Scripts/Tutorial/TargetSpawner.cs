@@ -19,8 +19,6 @@ public class TargetSpawner : MonoBehaviour
     private Transform _player;
     private Animations _animations;
 
-    private bool _isSpawned = false;
-
     private void Start()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("PlayerPoint");
@@ -32,14 +30,13 @@ public class TargetSpawner : MonoBehaviour
         {
             Debug.LogError("Nessun oggetto trovato con tag 'PlayerPoint'.");
         }
+
+
     }
 
     public void SpawnOggetto()
     {
-        if (!_isSpawned)
-        {
-            _isSpawned = true;
-
+ 
             if (oggettoDaSpawnare == null || puntoDiArrivo == null || _player == null)
             {
                 Debug.LogWarning("Oggetto, punto di arrivo o player non assegnato!");
@@ -56,7 +53,6 @@ public class TargetSpawner : MonoBehaviour
 
             // Avvia la coroutine per il movimento parabolico
             StartCoroutine(MuoviParabolicamente(nuovoOggetto.transform, spawnPosition, puntoDiArrivo.position));
-        }
 
         return;
     }
@@ -87,5 +83,10 @@ public class TargetSpawner : MonoBehaviour
 
             yield return null;
         }
+    }
+
+    public void DestroyHolder()
+    {
+        Destroy(gameObject);
     }
 }

@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
 
     private void Start()
     {
-        PlayMusic("Theme");
+        PlayMusic("MainTheme");
     }
 
 
@@ -48,6 +48,22 @@ public class AudioManager : MonoBehaviour
         {
             musicSource.clip = s.clip;
             musicSource.Play();
+        }
+    }
+
+    public void StopMusic(string name)
+    {
+        Sound s = Array.Find(musicSounds, x => x.name == name);
+
+        if (s == null)
+        {
+            //Debug.Log("Music Not Found");
+        }
+
+        else
+        {
+            musicSource.clip = s.clip;
+            musicSource.Stop();
         }
     }
 

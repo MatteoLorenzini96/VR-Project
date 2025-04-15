@@ -33,6 +33,7 @@ public class WaveManager : MonoBehaviour
     private Transform _player;
     private Transform _enemiesParent;
     private TargetSpawner _targetSpawner;
+    private AudioManager _audioManager;
 
     private Dictionary<int, List<Transform>> _groupedSpawnPoints = new Dictionary<int, List<Transform>>();
     private Dictionary<string, List<Transform>> _namedGroupedSpawnPoints = new Dictionary<string, List<Transform>>();
@@ -52,6 +53,8 @@ public class WaveManager : MonoBehaviour
     {
         _targetSpawner = GetComponent<TargetSpawner>();
         FindSpawnerPositions();
+
+        _audioManager = FindAnyObjectByType<AudioManager>();
 
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (_player == null)
@@ -130,6 +133,8 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator StartWave()
     {
+        _audioManager.PlayMusic("MainTheme");
+
         TutorialTurret _tutorialTurret = FindAnyObjectByType<TutorialTurret>();
         if (_tutorialTurret != null)
         {
@@ -202,6 +207,8 @@ public class WaveManager : MonoBehaviour
     private IEnumerator NextWave()
     {
         SpawnSkipTurret();
+        _audioManager.StopMusic("MainTheme");
+
         _waitingNextWaveCoroutine = StartCoroutine(DelayedNextWave());
         yield return _waitingNextWaveCoroutine;
     }
