@@ -150,7 +150,7 @@ public class BombAI : MonoBehaviour
             float t = Mathf.Clamp01(1f - (distance / maxDistance));
 
             float newPitch = Mathf.Lerp(1f, 3f, t); // più vicino = pitch più alto
-            float newVolume = Mathf.Lerp(0.3f, 2f, t); // più vicino = volume più alto
+            float newVolume = Mathf.Lerp(1f, 3f, t); // più vicino = volume più alto
 
             _tickingAudioSource.pitch = newPitch;
             _tickingAudioSource.volume = newVolume;
