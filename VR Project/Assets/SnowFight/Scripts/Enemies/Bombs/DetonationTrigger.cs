@@ -6,7 +6,7 @@ public class DetonationTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("SnowWall"))
+        if (other.CompareTag("Player") || other.CompareTag("SnowWall") || other.CompareTag("SnowBlock"))
         {
             //Debug.Log("Trigger attivato con " + other.gameObject.name);
 
