@@ -39,10 +39,18 @@ public class WaveManager : MonoBehaviour
 
     private float _elapsedTime = 0f;
 
+    private const string LastWaveKey = "LastWave"; // << MODIFICA
+
+    void Awake()
+    {
+        // Carica la wave salvata
+        _currentWaveIndex = PlayerPrefs.GetInt(LastWaveKey, 0); // << MODIFICA
+        Debug.Log("Wave iniziale caricata da PlayerPrefs: " + _currentWaveIndex); // << MODIFICA
+    }
+
     void Start()
     {
         _targetSpawner = GetComponent<TargetSpawner>();
-
         FindSpawnerPositions();
 
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;
@@ -93,7 +101,6 @@ public class WaveManager : MonoBehaviour
 
         foreach (Transform holder in _spawnPoints)
         {
-            // Verifica che il Transform abbia uno SpawnerIdentifier
             if (holder.GetComponent<SpawnerIdentifier>() == null)
             {
                 Debug.LogWarning($"{holder.name} non ha uno SpawnerIdentifier, verrà ignorato.");
@@ -107,7 +114,6 @@ public class WaveManager : MonoBehaviour
                 children.Add(child);
             }
 
-            // Salva nei dizionari e nella lista per l'inspector
             _groupedSpawnPoints[waveIndex] = children;
             _namedGroupedSpawnPoints[holder.name] = children;
 
@@ -120,8 +126,6 @@ public class WaveManager : MonoBehaviour
 
             waveIndex++;
         }
-
-        //Debug.Log("Spawn points raggruppati da Inspector.");
     }
 
     private IEnumerator StartWave()
@@ -197,7 +201,7 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator NextWave()
     {
-        SpawnSkipTurret();   //Spawna il Target per lo skip 
+        SpawnSkipTurret();
         _waitingNextWaveCoroutine = StartCoroutine(DelayedNextWave());
         yield return _waitingNextWaveCoroutine;
     }
@@ -206,25 +210,37 @@ public class WaveManager : MonoBehaviour
     {
         yield return new WaitForSeconds(_delayBetweenWaves);
         _currentWaveIndex++;
+
+        PlayerPrefs.SetInt(LastWaveKey, _currentWaveIndex); // << MODIFICA
+        PlayerPrefs.Save(); // << MODIFICA
+
         _waitingNextWaveCoroutine = null;
         StartCoroutine(StartWave());
     }
 
     public void SkipDelayBetweenWaves()
     {
-        //Debug.Log("Funziono");
         if (_waitingNextWaveCoroutine != null)
         {
             StopCoroutine(_waitingNextWaveCoroutine);
             _waitingNextWaveCoroutine = null;
             _currentWaveIndex++;
+
+            PlayerPrefs.SetInt(LastWaveKey, _currentWaveIndex); // << MODIFICA
+            PlayerPrefs.Save(); // << MODIFICA
+
             StartCoroutine(StartWave());
-            //Debug.Log("Wave skip requested. Skipping delay...");
         }
     }
 
     private void SpawnSkipTurret()
     {
         _targetSpawner.SpawnOggetto();
+    }
+
+    // Metodo pubblico utile per UI o debug
+    public int GetCurrentWaveIndex()
+    {
+        return _currentWaveIndex;
     }
 }

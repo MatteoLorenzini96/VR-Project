@@ -15,6 +15,7 @@ public class PlayerHealthController : MonoBehaviour
     private HealthManager _healthManager;
     [SerializeField] private HpText _hpText;
     private Color _originalNoiseColor;
+    private UIController _uiController;
 
     private void Start()
     {
@@ -32,6 +33,8 @@ public class PlayerHealthController : MonoBehaviour
             Debug.LogError("Il renderer non ha un materiale assegnato.");
             return;
         }
+
+        _uiController = GetComponent<UIController>();
 
         _originalNoiseColor = vignetteMaterial.GetColor("_NoiseColor");
         vignetteMaterial.SetFloat("_VignetteIntensity", 0.75f);
@@ -57,6 +60,11 @@ public class PlayerHealthController : MonoBehaviour
         UpdateVignette();
         UpdateHpText();
         FlashScreen(Color.red);
+
+        if(_healthManager.lives == 0f)
+        {
+            _uiController.ShowCanvas();
+        }
     }
 
     public void UpdateHpText()
