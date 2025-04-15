@@ -44,10 +44,17 @@ public class WaveManager : MonoBehaviour
 
     void Awake()
     {
-        // Carica la wave salvata
-        _currentWaveIndex = PlayerPrefs.GetInt(LastWaveKey, 0); // << MODIFICA
-        Debug.Log("Wave iniziale caricata da PlayerPrefs: " + _currentWaveIndex); // << MODIFICA
+        // Reset wave index e salvataggio
+        _currentWaveIndex = 0;
+        PlayerPrefs.SetInt(LastWaveKey, _currentWaveIndex); // << Reset anche nei PlayerPrefs
+        PlayerPrefs.Save();
+
+        // Reset del player (assegnazione esplicita a null, ma verrà comunque riassegnato in Start)
+        _player = null;
+
+        Debug.Log("Wave inizializzata a 0 e player azzerato.");
     }
+
 
     void Start()
     {
