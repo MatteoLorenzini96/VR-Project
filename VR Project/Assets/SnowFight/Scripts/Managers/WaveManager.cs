@@ -34,6 +34,8 @@ public class WaveManager : MonoBehaviour
     private Transform _enemiesParent;
     private TargetSpawner _targetSpawner;
     private AudioManager _audioManager;
+    private WaveCountdownUI _waveCountdownUI;
+
 
     private Dictionary<int, List<Transform>> _groupedSpawnPoints = new Dictionary<int, List<Transform>>();
     private Dictionary<string, List<Transform>> _namedGroupedSpawnPoints = new Dictionary<string, List<Transform>>();
@@ -222,15 +224,19 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator DelayedNextWave()
     {
+        _waveCountdownUI = FindAnyObjectByType<WaveCountdownUI>();
+
+        _waveCountdownUI?.StartCountdown(_delayBetweenWaves); // Avvia countdown
         yield return new WaitForSeconds(_delayBetweenWaves);
         _currentWaveIndex++;
 
-        PlayerPrefs.SetInt(LastWaveKey, _currentWaveIndex); // << MODIFICA
-        PlayerPrefs.Save(); // << MODIFICA
+        PlayerPrefs.SetInt(LastWaveKey, _currentWaveIndex);
+        PlayerPrefs.Save();
 
         _waitingNextWaveCoroutine = null;
         StartCoroutine(StartWave());
     }
+
 
     public void SkipDelayBetweenWaves()
     {
@@ -238,14 +244,18 @@ public class WaveManager : MonoBehaviour
         {
             StopCoroutine(_waitingNextWaveCoroutine);
             _waitingNextWaveCoroutine = null;
+
             _currentWaveIndex++;
 
-            PlayerPrefs.SetInt(LastWaveKey, _currentWaveIndex); // << MODIFICA
-            PlayerPrefs.Save(); // << MODIFICA
+            PlayerPrefs.SetInt(LastWaveKey, _currentWaveIndex);
+            PlayerPrefs.Save();
+
+            _waveCountdownUI?.StopCountdown(); // Ferma countdown
 
             StartCoroutine(StartWave());
         }
     }
+
 
     private void SpawnSkipTurret()
     {
