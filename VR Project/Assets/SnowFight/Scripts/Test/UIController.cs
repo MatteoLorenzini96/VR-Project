@@ -1,4 +1,7 @@
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
@@ -17,7 +20,7 @@ public class UIController : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Canvas Root non assegnato nell'Inspector!");
+            //Debug.LogWarning("Canvas Root non assegnato nell'Inspector!");
         }
     }
 
@@ -44,5 +47,14 @@ public class UIController : MonoBehaviour
     public int GetLastWave()
     {
         return PlayerPrefs.GetInt(LastWaveKey, 0);
+    }
+
+    public void ExitFromGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#else
+            Application.Quit();
+#endif
     }
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 
 [System.Serializable]
 public class NamedSpawnGroup
@@ -16,6 +15,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private bool _ignoreTutorial = false;
     [SerializeField] private bool _waitBeforeFirstWave = false;
     [SerializeField] private float _delayBetweenWaves = 15f;
+    [Header("Win Canvas")]
+    [SerializeField] private GameObject _winCanvasPrefab;
 
     [SerializeField] private List<Transform> _spawnPoints;
 
@@ -215,12 +216,23 @@ public class WaveManager : MonoBehaviour
 
     private IEnumerator NextWave()
     {
-        SpawnSkipTurret();
         _audioManager.StopMusic("MainTheme");
+
+        // Se l'ondata attuale è l'ultima disponibile
+        if (_currentWaveIndex >= _wavesData.Count - 1)
+        {
+            SpawnWinCanvas();
+            yield break;
+        }
+        else
+        {
+            SpawnSkipTurret();
+        }
 
         _waitingNextWaveCoroutine = StartCoroutine(DelayedNextWave());
         yield return _waitingNextWaveCoroutine;
     }
+
 
     private IEnumerator DelayedNextWave()
     {
@@ -267,4 +279,18 @@ public class WaveManager : MonoBehaviour
     {
         return _currentWaveIndex;
     }
+
+    private void SpawnWinCanvas()
+    {
+        if (_winCanvasPrefab != null)
+        {
+            Instantiate(_winCanvasPrefab, Vector3.zero, Quaternion.identity);
+            Debug.Log("WinCanvas istanziato.");
+        }
+        else
+        {
+            Debug.LogWarning("WinCanvas prefab non assegnato!");
+        }
+    }
+
 }
