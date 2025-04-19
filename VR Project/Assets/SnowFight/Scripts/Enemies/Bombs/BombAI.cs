@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections;
 
 public class BombAI : MonoBehaviour
 {
@@ -27,10 +28,11 @@ public class BombAI : MonoBehaviour
     private bool _isExploding = false;
     private SphereCollider _explosionCollider;
     private EmissiveBlinkDynamic _emissiveControl;
-
+    [SerializeField] private Renderer _visualRenderer;
+    [SerializeField] private Material _dissolveMaterial;
     private AudioSource _tickingAudioSource;
 
-    // Aggiunto per gestire la Point Light
+    [Header("Light Settings")]
     [SerializeField] private Light _pointLight;
     [SerializeField] private float _maxLightIntensity = 5f;  // Intensità massima della luce
     [SerializeField] private float _minLightIntensity = 0.2f;   // Intensità minima della luce
@@ -183,6 +185,9 @@ public class BombAI : MonoBehaviour
         if (_isExploding) return;
         _isExploding = true;
 
+        _emissiveControl.enabled = false;
+        _pointLight.gameObject.SetActive(false);
+
         // Ferma il suono di ticking
         if (_tickingAudioSource != null)
         {
@@ -192,9 +197,50 @@ public class BombAI : MonoBehaviour
         VFXManager.Instance.SpawnEffect(_bombExplosionVFXName, transform.position, Quaternion.identity);
         AudioManager.Instance.PlaySFX(_bombExplosionSFXName);
 
+        Dissolve();
         ExplosionCheck();
+
         _enemyIdentifier.DestroyEnemy();
     }
+
+    private void Dissolve()
+    {
+        if (_visualRenderer == null)
+        {
+            Debug.LogError("Renderer visivo non assegnato! Niente dissolve.");
+        }
+        else
+        {
+            Material newMat = new Material(_dissolveMaterial);
+            _visualRenderer.material = newMat;
+            StartCoroutine(DissolveCoroutine(newMat));
+        }
+    }
+
+    private IEnumerator DissolveCoroutine(Material mat)
+    {
+        float dissolveDuration = 1.5f;  // Durata della dissolvenza
+        float startValue = mat.GetFloat("_DissolveStrength"); // Prendi il valore iniziale
+        float endValue = 1f; // L'obiettivo della dissolvenza
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < dissolveDuration)
+        {
+            float t = elapsedTime / dissolveDuration;
+            // Lerp più graduale tra startValue e endValue
+            mat.SetFloat("_DissolveStrength", Mathf.Lerp(startValue, endValue, t));
+            elapsedTime += Time.deltaTime;
+            //Debug.Log("Giuro che funziono");
+
+            yield return null;
+        }
+
+        // Alla fine del processo, assicuriamoci che il valore sia esattamente 1
+        //Debug.Log("Ho Finito");
+        mat.SetFloat("_DissolveStrength", endValue);
+    }
+
 
     private void ExplosionCheck()
     {

@@ -164,6 +164,8 @@ MonoBehaviour:
   _bombExplosionVFXName: BombExplosionEffect
   _bombExplosionSFXName: BombExplosionSound
   isMoving: 1
+  _visualRenderer: {fileID: 5522851508636835453}
+  _dissolveMaterial: {fileID: 2100000, guid: 83dde221d9f8fa54dab92dbe057af411, type: 2}
   _pointLight: {fileID: 3819687742244820021}
   _maxLightIntensity: 5
   _minLightIntensity: 0
