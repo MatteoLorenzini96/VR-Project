@@ -284,8 +284,8 @@ public class WaveManager : MonoBehaviour
     {
         if (_winCanvasPrefab != null)
         {
-            Instantiate(_winCanvasPrefab, Vector3.zero, Quaternion.identity);
-            Debug.Log("WinCanvas istanziato.");
+            Instantiate(_winCanvasPrefab, _targetSpawner.puntoDiArrivo.transform.position, Quaternion.LookRotation(_player.forward));
+            //Debug.Log("WinCanvas istanziato.");
         }
         else
         {
