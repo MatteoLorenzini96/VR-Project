@@ -67,7 +67,7 @@ public class HealthManager : MonoBehaviour
     public void TakeExplosion(int damage)
     {
         lives -= damage;
-        Debug.Log($"{gameObject.name} ha subito un'esplosione. Danno: {damage}. Vite rimaste: {lives}");
+        //Debug.Log($"{gameObject.name} ha subito un'esplosione. Danno: {damage}. Vite rimaste: {lives}");
 
         if (_snowBlockHealth != null)
         {

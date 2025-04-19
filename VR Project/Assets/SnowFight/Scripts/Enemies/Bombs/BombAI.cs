@@ -173,12 +173,12 @@ public class BombAI : MonoBehaviour
         Explode();
     }
 
-    public void CreateExplosionCollider()
+    /*public void CreateExplosionCollider()
     {
         _explosionCollider = gameObject.AddComponent<SphereCollider>();
         _explosionCollider.radius = _explosionRadius;
         _explosionCollider.isTrigger = true;
-    }
+    }*/
 
     public void Explode()
     {
@@ -252,24 +252,34 @@ public class BombAI : MonoBehaviour
             float distancePercentage = Mathf.Clamp01(distance / _explosionRadius);
 
             int damage = 0;
+#pragma warning disable CS0219 // La variabile è assegnata, ma il suo valore non viene mai usato
+            string reason = "";
+#pragma warning restore CS0219 // La variabile è assegnata, ma il suo valore non viene mai usato
 
             if (obj.CompareTag("Player"))
             {
                 damage = Mathf.RoundToInt(Mathf.Lerp(_playerMaxDamage, _playerMinDamage, distancePercentage));
+                reason = "Player";
             }
             else if (obj.CompareTag("SnowWall") || obj.CompareTag("SnowBlock"))
             {
                 damage = Mathf.RoundToInt(Mathf.Lerp(_snowBlockMaxDamage, _snowBlockMinDamage, distancePercentage));
+                reason = "SnowBlock";
             }
+
+            //Debug.Log($"[ExplosionCheck] {obj.name} | Tag: {obj.tag} | Dist: {distance:F2} | Perc: {distancePercentage:F2} | Damage: {damage} | Motivo: {reason}");
 
             if (damage > 0)
             {
-                Debug.Log($"Danno inflitto a {obj.name}: {damage}");
-
-                HealthManager hm = obj.GetComponent<HealthManager>();
+                HealthManager hm = obj.GetComponentInParent<HealthManager>();
                 if (hm != null)
                 {
+                    //Debug.Log($"Infliggo {damage} danni a {obj.name}");
                     hm.TakeExplosion(damage);
+                }
+                else
+                {
+                    Debug.LogWarning($"Nessun HealthManager su {obj.name}");
                 }
             }
         }

@@ -251,7 +251,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.8
+  m_Radius: 0.4
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6567670384130871001
 MonoBehaviour:
@@ -265,7 +265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ac4fa6a6fa236e41aaedacd5ed2d75b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombAI: {fileID: 4324569890014284089}
 --- !u!114 &7286847752118476099
 MonoBehaviour:
   m_ObjectHideFlags: 0

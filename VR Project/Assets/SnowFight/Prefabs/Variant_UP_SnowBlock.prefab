@@ -52,6 +52,10 @@ PrefabInstance:
       propertyPath: m_SecondaryAttachTransform
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5912731091775607053, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
+      propertyPath: m_TagString
+      value: SnowBlock
+      objectReference: {fileID: 0}
     - target: {fileID: 8477897558168495691, guid: b79b358b5fae0134b95b787728abc5f9, type: 3}
       propertyPath: m_Materials.Array.size
       value: 2
