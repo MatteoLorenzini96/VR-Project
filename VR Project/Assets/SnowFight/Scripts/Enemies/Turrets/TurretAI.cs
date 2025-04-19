@@ -175,6 +175,8 @@ public class TurretAI : MonoBehaviour
 
     public void HandleDamage()
     {
+        StopCoroutine(ShootAtPlayer());
+
         switch (_healthManager.lives)
         {
             case 0:
@@ -190,7 +192,6 @@ public class TurretAI : MonoBehaviour
                 AudioManager.Instance.PlaySFX(_turretDestructionSFXName);
 
                 _animations.BegingTargetUp();
-                StopCoroutine(ShootAtPlayer());
 
                 StartCoroutine(DoRagdoll());
 
